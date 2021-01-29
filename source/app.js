@@ -24,6 +24,8 @@ import { LatestPostsCard } from './components/latest-posts-card.js';
 				createElement( LatestPostsCard, props ),
 				container
 			);
+
+			container.classList = []; // Remove .loading-content
 		}
 	}
 

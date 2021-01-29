@@ -38,10 +38,21 @@ add_filter( 'script_loader_tag', function( $tag, $handle, $src ) {
 function __return_placeholder_div( $id = '' ) {
 	if ( ! $id ) {
 		// this works, but it'd be nice to be able to pass in an arbitrary id from things like add_menu_page()
+		// `wp_add_dashboard_widget()` provides a `$callback_args` param, which gets passed to the callback.
+		// could add something like that to all Core functions that ask for a callback
 		$id = current_filter() . '-container';
+			// does this work in all contexts? it does for add_menu_page, but maybe won't elsewhere
 	}
 
-	// would be nice to show a spinner here
+	?>
 
-	echo "<div id='$id'>loading...</div>";
+	<div id="<?php echo esc_attr( $id ); ?>" class="loading-content">
+		<p class="spinner is-active">
+			<span class="screen-reader-text">
+				Loading...
+			</span>
+		</p>
+	</div>
+
+	<?php
 }
