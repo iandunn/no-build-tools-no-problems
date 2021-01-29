@@ -13,7 +13,7 @@ window.wp = window.wp || {};
 /**
  * External dependencies
  */
-import htm from 'https://unpkg.com/htm?module'
+import htm from 'https://unpkg.com/htm@3.0.4/dist/htm.module.js?module'
 // this would eventually be wp-includes/js/dist/htm.js or whatever. using unpkg.com in this context so don't have to add complexity of `npm install` step
 // snowpack.dev could be used to import "bare module specifiers" like `import htm from 'htm'`
 

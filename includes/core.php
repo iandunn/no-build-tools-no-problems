@@ -69,7 +69,7 @@ function __return_placeholder_div( $id = '' ) {
 function preload_modules( $plugin_folder ) {
 	// the order is important here, start w/ deepest depeendencies?
 		// need to make this DRY with core.js, but depends on how it'll eventually be used there
-	printf( '<link rel="modulepreload" href="https://unpkg.com/htm?module" />' );
+	printf( '<link rel="modulepreload" href="https://unpkg.com/htm@3.0.4/dist/htm.module.js?module" />' );
 
 	$plugin_folder = untrailingslashit( $plugin_folder );
 
