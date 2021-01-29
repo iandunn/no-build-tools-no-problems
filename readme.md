@@ -21,9 +21,12 @@ The stuff in `package.json`, etc are optional enhancements (see below).
 
 You can run the same `source/` scripts in production if you'd like. For smaller projects, or new-to-JS devs, that can be a great entry point.
 
-As your project grows, you may want to add a build step to optimize performance or support older browsers. It's optional, though.
+If that's where you're at, you can `rm .gitignore babel.config.js package.json package-lock.json`, and revel in how tidy your root folder is.
+
+If you're building a large project, or need to support older browsers, then you can add a build step for production files. You'll still be able to develop locally without any tooling, though.
 
 1. Change `USE_BUILD_STEP` in `plugin.php` to `true`
+1. Set `WP_ENVIRONMENT_TYPE` to `production` in your production server's `wp-config.php` or envvar, and to `local` in your dev environment.
 1. `npm install`
 1. `npm run build`
 1. Deal with all the normal build tool problems 😞🙁😖🥃😩😢🥃😭😡🥃🤬🥃🥃🥃🥱🛌💤
@@ -39,6 +42,6 @@ If we want the vast majority of WP developers to build rich JS applications, the
 
 Right now there's a big wall between most folks and building what they want, in the ways that we want them to build it. If we don't make it simple, the closest most devs will ever get to building a block is [ACF](https://www.advancedcustomfields.com/resources/blocks/).
 
-That's not to hate on ACF, they've done a great thing by making it simple. But if we want folks to learn JS deeply, then we have to internalize the importance of simplicity. It's not until we do that that we'll be able to make modern JS development in WordPres something that's accessible to everyone.
+That's not to hate on ACF, they've done a great thing by making it simple. But if we want folks to learn JS deeply, then we have to internalize the importance of simplicity again. Until we re-learn that lesson, we won't be able to make modern JS development in WordPress something that's accessible to everyone.
 
 xref https://github.com/WordPress/gutenberg/issues/25077

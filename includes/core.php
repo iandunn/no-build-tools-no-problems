@@ -7,6 +7,7 @@ namespace NoBuildToolsNoProblems\Core;
  */
 
 add_action( 'admin_enqueue_scripts', function() {
+	// This is always loaded from `source/`, because it's not needed when a build step is used.
 	wp_register_script(
 		'nbtnp-core',
 		plugins_url( 'source/core.js', __DIR__ ),

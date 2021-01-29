@@ -24,10 +24,13 @@ add_action( 'admin_menu', function() {
 } );
 
 add_action( 'admin_enqueue_scripts', function() {
-	$folder       = USE_BUILD_STEP ? 'build' : 'source';
-	$dependencies = array( 'wp-element', 'wp-components' );
+	$folder                    = 'source';
+	$is_production_environment = in_array( wp_get_environment_type(), array( 'production', 'staging' ) );
+	$dependencies              = array( 'wp-element', 'wp-components' );
 
-	if ( ! USE_BUILD_STEP ) {
+	if ( USE_BUILD_STEP && $is_production_environment ) {
+		$folder = 'build';
+	} else {
 		$dependencies[] = 'nbtnp-core';
 	}
 
