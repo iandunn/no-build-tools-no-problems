@@ -46,9 +46,9 @@ add_action( 'admin_enqueue_scripts', function() {
 
 	wp_enqueue_script(
 		'no-build-tools-no-problems',
-		plugins_url( "$folder/app.js", __FILE__ ),
+		plugins_url( "$folder/index.js", __FILE__ ),
 		$dependencies,
-		filemtime( __DIR__ . "/$folder/app.js" )
+		filemtime( __DIR__ . "/$folder/index.js" )
 	);
 
 	wp_enqueue_style(

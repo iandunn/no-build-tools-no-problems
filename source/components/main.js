@@ -14,7 +14,7 @@ export function MainView() {
 		<div className="wrap">
 			<h1>No Build Tools, No Problems</h1>
 
-			<div class="cards-container">
+			<div className="cards-container">
 				<${LatestPostsCard} />
 
 				<${Charts} />

@@ -23,7 +23,7 @@ You can run the same `source/` scripts in production if you'd like. For smaller 
 
 If that's where you're at, you can `rm .gitignore babel.config.js package.json package-lock.json`, and revel in how tidy your root folder is.
 
-If you're building a CPU-heavy project, want to integrate CommonJS modules, or need to support older browsers, then you can add a build step for production files. You'll still be able to develop locally without any tooling, though.
+If you're building a large or CPU-intensive project, want to integrate CommonJS modules, or need to support older browsers, then you can add a build step for production files. You'll still be able to develop locally without any `watch` tooling, though.
 
 1. `npm install`
 1. `npm run build`
@@ -34,7 +34,7 @@ If you're building a CPU-heavy project, want to integrate CommonJS modules, or n
 
 ### Why
 
-Build tools are the worst part of modern JavaScript. They create a large barrier for new-to-JS devs, and are a recurring pain to set up and use regardless of experience level. They break randomly for opaque reasons, and which difficult to diagnose and fix.
+Build tools are the worst part of modern JavaScript. They create a large barrier for new-to-JS devs, and are a recurring pain to set up and use regardless of experience level. They break randomly for opaque reasons, which are difficult to diagnose and fix.
 
 They've also been totally unnecessary for years, but we're still stuck with ["complexity stockholm syndrome"](https://www.pika.dev/blog/pika-web-a-future-without-webpack).
 
@@ -49,4 +49,4 @@ That's not to hate on ACF, they've done a great thing by making it simple. But i
 
 Right now this is just a proof-of-concept. Fork it and play around with it, see if it's useful in some real-world projects, etc. Give feedback by [reporting bugs & feature requests](https://github.com/iandunn/no-build-tools-no-problems/issues), and [starting discussions](https://github.com/iandunn/no-build-tools-no-problems/discussions). What kinds of problems or limitations do you run into? What's needed to make this live up to the vision?
 
-if we can get this approach working well for a range of small/medium-sized plugins, then we can make a proposal for Core to support it, so that everything in `core.php` and `core.js` will be done automatically.
+if we can get this approach working well for a range of small/medium-sized plugins, then we can make a proposal for Core to support it, so that everything in `core.php` and `core.js` will be provided automatically.
