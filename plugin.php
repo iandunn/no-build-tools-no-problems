@@ -35,6 +35,14 @@ add_action( 'admin_enqueue_scripts', function() {
 	wp_enqueue_script(
 		'no-build-tools-no-problems',
 		plugins_url( $path, __FILE__ ),
-		$dependencies
+		$dependencies,
+		filemtime( __DIR__ . "/$path" )
+	);
+
+	wp_enqueue_style(
+		'no-build-tools-no-problems',
+		plugins_url( 'source/app.css', __FILE__ ),
+		array(),
+		filemtime( __DIR__ . '/source/app.css' )
 	);
 } );

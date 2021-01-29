@@ -1,2 +1,12 @@
-/*add some css in here, and enqueue it*/
-/*some plugins may want sass, and that's fine and should be available, but it shouldn't be required*/
+#toplevel_page_no-build-tools-no-problems-container .components-card {
+	margin-top: 2em;
+}
+
+#toplevel_page_no-build-tools-no-problems-container .components-card.is-size-medium {
+	max-width: 50%;
+}
+
+#toplevel_page_no-build-tools-no-problems-container .components-card ul {
+	list-style: disc;
+	margin-left: 1em;
+}

@@ -62,25 +62,29 @@ export class LatestPostsCard extends Component {
 		const { loaded, loading, posts } = this.state;
 
 		return html`
-			<${ Card } width="500">
-				<!-- width not working, how to pass in correctly? 'size' param instead?-->
+			<div class="wrap">
+				<h1>No Build Tools, No Problems</h1>
 
-				<${ CardHeader }>
-					header
-				<//>
+				<${ Card } width="500">
+					<!-- width not working, how to pass in correctly? 'size' param instead?-->
 
-				<${ CardBody }>
-					<${ Button } isPrimary onClick=${ this.fetchPosts }>
-						${ loaded ? 'Reload' : 'Load' }
+					<${ CardHeader }>
+						Latest Posts
 					<//>
 
-					${ ( loaded || loading ) && PostList( { posts, loading } ) }
-				<//>
+					<${ CardBody }>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+						</p>
 
-				<${ CardFooter }>
-					feet
+						${ ( loaded || loading ) && PostList( { posts, loading } ) }
+
+						<${ Button } isPrimary onClick=${ this.fetchPosts }>
+							${ loaded ? 'Reload' : 'Load' }
+						<//>
+					<//>
 				<//>
-			<//>
+			</div>
 		`;
 	}
 }
