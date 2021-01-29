@@ -1,6 +1,8 @@
 # No Build Tools, No Problems
 
-Experiment building a WordPress-centric React app without any build tools. A vision for how much simpler life could be.
+An experiment building a WordPress-centric React app without any build tools.
+
+A vision for how much simpler life could be. _At least, in theory. Let's find out what the real-world tradeoffs and limitations are..._
 
 
 ### Dev Environment
@@ -12,9 +14,7 @@ Experiment building a WordPress-centric React app without any build tools. A vis
 
 Seriously, that's it 🥃 🍰
 
-_( at least, in theory. let's find out what the real-world tradeoffs and limitations are... )_
-
-The stuff in `package.json`, etc are optional enhancements (see below).
+You can write standard React components in ES6, and use any of the components or packages that Gutenberg provides. The only difference is that you'll write templates with [HTM](https://github.com/developit/htm) instead of JSX.
 
 
 ### Production Environment
@@ -26,7 +26,7 @@ If that's where you're at, you can `rm .gitignore babel.config.js package.json p
 If you're building a large project, or need to support older browsers, then you can add a build step for production files. You'll still be able to develop locally without any tooling, though.
 
 1. Change `USE_BUILD_STEP` in `plugin.php` to `true`
-1. Set `WP_ENVIRONMENT_TYPE` to `production` in your production server's `wp-config.php` or envvar, and to `local` in your dev environment.
+1. Set [the `WP_ENVIRONMENT_TYPE` constant or environment variable](https://make.wordpress.org/core/2020/08/27/wordpress-environment-types/) to `production` on your production server, and to `local` in your dev environment.
 1. `npm install`
 1. `npm run build`
 1. Deal with all the normal build tool problems 😞🙁😖🥃😩😢🥃😭😡🥃🤬🥃🥃🥃🥱🛌💤
