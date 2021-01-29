@@ -31,6 +31,31 @@ export class LatestPostsCard extends Component {
 			loaded: false,
 			posts: [],
 		 };
+
+		this.fetchPosts = this.fetchPosts.bind( this );
+	}
+
+	fetchPosts() {
+		this.setState( { loading: true }, () => {
+			// simulate fetching from api
+			const timerID = setTimeout( () => {
+				this.setState( {
+					loading: false,
+					loaded: true,
+					posts: [
+						{
+							id: 1,
+							title: "Hello World",
+						},
+
+						{
+							id: 2,
+							title: "Goodbye World",
+						},
+					],
+				} );
+			}, 700 )
+		} );
 	}
 
 	render() {
@@ -45,12 +70,11 @@ export class LatestPostsCard extends Component {
 				<//>
 
 				<${ CardBody }>
-					<${ Button } isPrimary onClick=${ () => this.setState( { loading: true } ) }>
+					<${ Button } isPrimary onClick=${ this.fetchPosts }>
 						${ loaded ? 'Reload' : 'Load' }
 					<//>
 
 					${ ( loaded || loading ) && PostList( { posts, loading } ) }
-					<!--	can call like <PostList /> inside expression like this? -->
 				<//>
 
 				<${ CardFooter }>
@@ -63,11 +87,7 @@ export class LatestPostsCard extends Component {
 
 // move to diff file
 function PostList( { posts, loading } ) {
-
 	if ( loading ) {
-		// fetch from api
-		// when have them, set loaded=true, loading=false, posts=data from api
-
 		return html`
 			<div>
 				loading...
@@ -81,7 +101,11 @@ function PostList( { posts, loading } ) {
 
 	return html`
 		<ul>
-			<li key="1"> title </li>
+			${ posts.map( post => html`
+				<li key="${ post.id }">
+					${ post.title }
+				</li>
+			` ) }
 		</ul>
 	`;
 }

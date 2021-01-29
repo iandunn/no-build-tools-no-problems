@@ -29,6 +29,11 @@ add_action( 'admin_enqueue_scripts', function() {
  * @param string $src    The script's source URL.
  */
 add_filter( 'script_loader_tag', function( $tag, $handle, $src ) {
+	if ( ! SCRIPT_DEBUG ) {
+		// this and other instances need to check if it's defined too, can't assume it's defined as false instead of just not defined at all
+		return $tag;
+	}
+
 	$modules = array( 'htm', 'no-build-tools-no-problems' );
 
 	if ( ! in_array( $handle, $modules, true ) ) {

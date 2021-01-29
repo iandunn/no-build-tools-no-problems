@@ -14,6 +14,7 @@ See https://github.com/WordPress/gutenberg/issues/25077
 1. Refresh
 
 Seriously, that's it 🥃
+
 _( at least, in theory. let's find out what the real-world tradeoffs and limitations are... )_
 
 
@@ -22,3 +23,5 @@ _( at least, in theory. let's find out what the real-world tradeoffs and limitat
 1. `npm install`
 1. `npm run build`
 1. Deal with all the normal build tool problems. Hey, nothing's perfect. At least the misery is confined to a much smaller area.
+
+You could run the same code in production, but HTM adds runtime overhead. The build process transpiles it to native JS, just like JSX normally is.
