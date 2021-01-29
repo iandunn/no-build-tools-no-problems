@@ -23,13 +23,13 @@ You can run the same `source/` scripts in production if you'd like. For smaller 
 
 If that's where you're at, you can `rm .gitignore babel.config.js package.json package-lock.json`, and revel in how tidy your root folder is.
 
-If you're building a large project, want to integrate NPM modules, or need to support older browsers, then you can add a build step for production files. You'll still be able to develop locally without any tooling, though.
+If you're building a CPU-heavy project, want to integrate NPM modules, or need to support older browsers, then you can add a build step for production files. You'll still be able to develop locally without any tooling, though.
 
-1. Change `USE_BUILD_STEP` in `plugin.php` to `true`
-1. Set [the `WP_ENVIRONMENT_TYPE` constant or environment variable](https://make.wordpress.org/core/2020/08/27/wordpress-environment-types/) to `production` on your production server, and to `local` in your dev environment.
 1. `npm install`
 1. `npm run build`
-1. Deal with all the normal build tool problems 😞🙁😖🥃😩😢🥃😭😡🥃🤬🥃🥃🥃🥱🛌💤
+1. Deal with all the normal build tool problems  🙁😞😖🥃😩😢🥃😭😡🥃🤬🥃🥃🥃🥱🛌💤🔁
+1. Once the transpiled files exist in `build/`, the plugin will automatically switch to enqueue them instead of `source/`. That lets you test them before deploying to production.
+1. Once you're done testing, `rm -rf build/*`, and the `source/` files will automatically be enqueued again.
 
 
 ### Why
@@ -44,4 +44,9 @@ Right now there's a big wall between most folks and building what they want, in 
 
 That's not to hate on ACF, they've done a great thing by making it simple. But if we want folks to learn JS deeply, then we have to internalize the importance of simplicity again. Until we re-learn that lesson, we won't be able to make modern JS development in WordPress something that's accessible to everyone.
 
-xref https://github.com/WordPress/gutenberg/issues/25077
+
+### Help Wanted
+
+Right now this is just a proof-of-concept. Fork it and play around with it, see if it's useful in some real-world projects, etc. Give feedback by [reporting bugs & feature requests](https://github.com/iandunn/no-build-tools-no-problems/issues), and [starting discussions](https://github.com/iandunn/no-build-tools-no-problems/discussions). What kinds of problems or limitations do you run into? What's needed to make this live up to the vision?
+
+if we can get this approach working well for a range of small/medium-sized plugins, then we can make a proposal for Core to support it, so that everything in `core.php` and `core.js` will be done automatically.

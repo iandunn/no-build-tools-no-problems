@@ -11,7 +11,6 @@ namespace NoBuildToolsNoProblems;
 require __DIR__ . '/includes/core.php';
 // Below this is stuff the plugin would need to do itself.
 
-const USE_BUILD_STEP = false;
 
 add_action( 'admin_menu', function() {
 	add_menu_page(
@@ -24,13 +23,11 @@ add_action( 'admin_menu', function() {
 } );
 
 add_action( 'admin_enqueue_scripts', function() {
-	$folder                    = 'source';
-	$is_production_environment = in_array( wp_get_environment_type(), array( 'production', 'staging' ) );
-	$dependencies              = array( 'wp-element', 'wp-components' );
+	$folder       = 'build';
+	$dependencies = array( 'wp-element', 'wp-components' );
 
-	if ( USE_BUILD_STEP && $is_production_environment ) {
-		$folder = 'build';
-	} else {
+	if ( ! file_exists( __DIR__ . "/$folder/app.js" ) ) {
+		$folder         = 'source';
 		$dependencies[] = 'nbtnp-core';
 	}
 
