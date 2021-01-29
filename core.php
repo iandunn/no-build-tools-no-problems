@@ -21,10 +21,6 @@ add_action( 'admin_enqueue_scripts', function() {
  * this is necessary for app.js to be able to `import` other files in the plugin
  *
  * workaround until https://core.trac.wordpress.org/ticket/12009 or https://core.trac.wordpress.org/ticket/22249 are fixed
- *
- * @param string $tag    The <script> tag for the enqueued script.
- * @param string $handle The script's registered handle.
- * @param string $src    The script's source URL.
  */
 add_filter( 'script_loader_tag', function( $tag, $handle, $src ) {
 	if ( ! SCRIPT_DEBUG ) {

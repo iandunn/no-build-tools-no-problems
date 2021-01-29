@@ -10,3 +10,7 @@
 	list-style: disc;
 	margin-left: 1em;
 }
+
+#toplevel_page_no-build-tools-no-problems-container .components-spinner {
+	margin-bottom: 1em;
+}

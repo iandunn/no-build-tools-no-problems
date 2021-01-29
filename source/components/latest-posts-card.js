@@ -11,12 +11,8 @@ const html = window.wp.html;
  */
 import { PostList } from './post-list.js';
 
+
 export class LatestPostsCard extends Component {
-	/**
-	 * Initialize the component.
-	 *
-	 * @param {Array} props
-	 */
 	constructor( props ) {
 		super( props );
 
@@ -59,9 +55,7 @@ export class LatestPostsCard extends Component {
 			<div className="wrap">
 				<h1>No Build Tools, No Problems</h1>
 
-				<${ Card } width="500">
-					<!-- width not working, how to pass in correctly? 'size' param instead?-->
-
+				<${ Card }>
 					<${ CardHeader }>
 						Latest Posts
 					<//>
@@ -80,11 +74,5 @@ export class LatestPostsCard extends Component {
 				<//>
 			</div>
 		`;
-
-		// create some other components too, to show working w/ multiple components
-		// look at quick-nav-int and comp-comments for some examples
-		// also look at storybook for some ideas of existing components to use
-		// button
-		// card
 	}
 }

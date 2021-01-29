@@ -41,7 +41,7 @@ add_action( 'admin_enqueue_scripts', function() {
 	wp_enqueue_style(
 		'no-build-tools-no-problems',
 		plugins_url( 'source/app.css', __FILE__ ),
-		array(),
+		array( 'wp-components' ),
 		filemtime( __DIR__ . '/source/app.css' )
 	);
 } );
