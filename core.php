@@ -7,13 +7,11 @@ namespace NoBuildToolsNoProblems\Core;
  */
 
 add_action( 'admin_enqueue_scripts', function() {
-	return; // have to `import` in order to access `htm` variable? should be a way to do expose that globally while enqueuing. look at the different files in node_modules
-
 	wp_register_script(
-		'htm',
-		'https://unpkg.com/htm@3.0.4/dist/htm.module.js?module', // would bundle locally for actual core usage
+		'nbtnp-core',
+		plugins_url( 'source/core.js', __FILE__ ),
 		array(),
-		null // unpkg.com will 302 redirect if there's a `ver` param
+		filemtime( __DIR__ . '/source/core.js' )
 	);
 }, 9 );
 
@@ -34,7 +32,7 @@ add_filter( 'script_loader_tag', function( $tag, $handle, $src ) {
 		return $tag;
 	}
 
-	$modules = array( 'htm', 'no-build-tools-no-problems' );
+	$modules = array( 'no-build-tools-no-problems', 'nbtnp-core' );
 
 	if ( ! in_array( $handle, $modules, true ) ) {
 		return $tag;

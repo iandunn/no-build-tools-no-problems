@@ -1,20 +1,9 @@
 /**
  * WordPress dependencies
  */
-const { Button, Card, CardHeader, CardBody, CardFooter, Spinner } = window.wp.components;
-const { createElement, Component } = window.wp.element;
-
-
-/**
- * External dependencies
- */
-import htm from '../../node_modules/htm/dist/htm.module.js';
-
-const html = htm.bind( createElement );
-	// eventually should just be registered as a script in wp, so Core could provide it to everyone
-	// how to import it from then, though?
-	// maybe could  /wp-includes/js/htm.js or whatever, but that's hardcoding path, which wouldn't work in all case
-	// need to make a global `window.htm` var accessible or something, same as window.wp.components?
+const { Button, Card, CardHeader, CardBody } = window.wp.components;
+const { Component } = window.wp.element;
+const html = window.wp.html;
 
 
 /**

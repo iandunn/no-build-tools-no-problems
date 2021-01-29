@@ -2,15 +2,7 @@
  * WordPress dependencies
  */
 const { Spinner } = window.wp.components;
-const { createElement } = window.wp.element;
-
-
-/**
- * External dependencies
- */
-import htm from '../../node_modules/htm/dist/htm.module.js';
-
-const html = htm.bind( createElement );
+const html = window.wp.html;
 
 export function PostList( { posts, loading } ) {
 	if ( loading ) {

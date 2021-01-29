@@ -11,6 +11,7 @@ namespace NoBuildToolsNoProblems;
 require __DIR__ . '/core.php';
 // Below this is stuff the plugin would need to do itself.
 
+const USE_BUILD_STEP = false;
 
 add_action( 'admin_menu', function() {
 	add_menu_page(
@@ -23,13 +24,11 @@ add_action( 'admin_menu', function() {
 } );
 
 add_action( 'admin_enqueue_scripts', function() {
-	$path         = SCRIPT_DEBUG ? 'source/app.js' : 'build/app.min.js';
+	$path         = ! USE_BUILD_STEP || SCRIPT_DEBUG ? 'source/app.js' : 'build/app.min.js';
 	$dependencies = array( 'wp-element', 'wp-components' );
 
-	if ( SCRIPT_DEBUG ) {
-//		$dependencies[] = 'htm';
-//		need to `import` for now? eventually don't wanna
-		// add to package.json if gonna use it here, and add `npm i` to setup instructions
+	if ( ! USE_BUILD_STEP ) {
+		$dependencies[] = 'nbtnp-core';
 	}
 
 	wp_enqueue_script(
