@@ -56,3 +56,31 @@ function __return_placeholder_div( $id = '' ) {
 
 	<?php
 }
+
+// call during wp_head and/or admin_head
+	// better action?
+// ideally would just wp_enqueue_script and automatically have type="module" and corresponding <link rel="preload" ...>
+function preload_modules( $plugin_folder ) {
+	// the order is important here, start w/ deepest depeendencies?
+		// need to make this DRY with core.js, but depends on how it'll eventually be used there
+	printf( '<link rel="modulepreload" href="https://unpkg.com/htm?module" />' );
+
+	$plugin_folder = untrailingslashit( $plugin_folder );
+	$files         = glob( $plugin_folder . "/{,*/,*/*/,*/*/*/}*.js", GLOB_BRACE );
+
+	foreach ( $files as $file ) {
+		$url = plugins_url( basename( $file ), $file );
+
+		// enqueued files need the &ver= param so they match the enqueued url, imports don't
+		$enqueued = in_array( basename( $file ), array( 'core.js', 'app.js' ), true );
+
+		if ( $enqueued ) {
+			// ideally wp_enqueue_script would handle this, so that the value is DRY & not tightly coupled between here and plugin.php
+			$url = add_query_arg( 'ver', rawurlencode( filemtime( $file ) ), $url );
+		}
+
+		// should use 'preload' here b/c FF doesn't support 'modulepreload' yet?
+		// but that has it's own problems for preloading modules?
+		printf( '<link rel="modulepreload" href="%s" />', $url );
+	}
+}

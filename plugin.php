@@ -6,6 +6,7 @@
  */
 
 namespace NoBuildToolsNoProblems;
+use function NoBuildToolsNoProblems\Core\preload_modules;
 
 // This is the stuff the Core could potentially provide to plugins.
 require __DIR__ . '/includes/core.php';
@@ -22,12 +23,24 @@ add_action( 'admin_menu', function() {
 	);
 } );
 
+// could maybe go in core.php?
+function get_serve_folder() {
+	// Cache the result so we don't have to hit the filesystem every time this is called.
+	static $folder;
+
+	if ( ! $folder ) {
+		// cache the result as a static var or something so this can
+		$folder = file_exists( __DIR__ . '/build/app.js' ) ? 'build' : 'source';
+	}
+
+	return $folder;
+}
+
 add_action( 'admin_enqueue_scripts', function() {
-	$folder       = 'build';
+	$folder       = get_serve_folder();
 	$dependencies = array( 'wp-element', 'wp-components' );
 
-	if ( ! file_exists( __DIR__ . "/$folder/app.js" ) ) {
-		$folder         = 'source';
+	if ( 'source' === $folder ) {
 		$dependencies[] = 'nbtnp-core';
 	}
 
@@ -44,4 +57,8 @@ add_action( 'admin_enqueue_scripts', function() {
 		array( 'wp-components' ),
 		filemtime( __DIR__ . '/source/app.css' )
 	);
+} );
+
+add_action( 'admin_head', function() {
+	preload_modules( __DIR__ . '/'. get_serve_folder() );
 } );
