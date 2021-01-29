@@ -18,7 +18,7 @@ add_action( 'admin_menu', function() {
 		'No Build Tools, No Problems',
 		'read',
 		'no-build-tools-no-problems',
-		__NAMESPACE__ . '\Core\__return_container_div'
+		__NAMESPACE__ . '\Core\__return_placeholder_div'
 	);
 } );
 

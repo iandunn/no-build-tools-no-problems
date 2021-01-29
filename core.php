@@ -44,7 +44,8 @@ add_filter( 'script_loader_tag', function( $tag, $handle, $src ) {
 }, 10, 3 );
 
 // rename to "element" to be generic?
-function __return_container_div( $id = '' ) {
+// maybe use "placeholder" or "shell". not an app shell in the PWA sense.
+function __return_placeholder_div( $id = '' ) {
 	if ( ! $id ) {
 		// this works, but it'd be nice to be able to pass in an arbitrary id from things like add_menu_page()
 		$id = current_filter() . '-container';

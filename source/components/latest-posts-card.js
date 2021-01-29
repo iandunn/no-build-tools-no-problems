@@ -17,6 +17,11 @@ const html = htm.bind( createElement );
 	// need to make a global `window.htm` var accessible or something, same as window.wp.components?
 
 
+/**
+ * Internal dependencies
+ */
+import { PostList } from './post-list.js';
+
 export class LatestPostsCard extends Component {
 	/**
 	 * Initialize the component.
@@ -62,7 +67,7 @@ export class LatestPostsCard extends Component {
 		const { loaded, loading, posts } = this.state;
 
 		return html`
-			<div class="wrap">
+			<div className="wrap">
 				<h1>No Build Tools, No Problems</h1>
 
 				<${ Card } width="500">
@@ -86,30 +91,11 @@ export class LatestPostsCard extends Component {
 				<//>
 			</div>
 		`;
-	}
-}
 
-// move to diff file
-function PostList( { posts, loading } ) {
-	if ( loading ) {
-		return html`
-			<div>
-				loading...
-				<${ Spinner } />
-				<!-- todo why isn't ^ working?  remove "loading" once it is
-				the markup is there, but the spinner image isn't, so it's a css issue or something? or needs a specific container?
-				 -->
-			</div>
-		`;
+		// create some other components too, to show working w/ multiple components
+		// look at quick-nav-int and comp-comments for some examples
+		// also look at storybook for some ideas of existing components to use
+		// button
+		// card
 	}
-
-	return html`
-		<ul>
-			${ posts.map( post => html`
-				<li key="${ post.id }">
-					${ post.title }
-				</li>
-			` ) }
-		</ul>
-	`;
 }

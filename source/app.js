@@ -8,7 +8,7 @@ const { render, createElement } = window.wp.element;
 /**
  * Internal dependencies
  */
-import { LatestPostsCard } from './components/latest-posts.js';
+import { LatestPostsCard } from './components/latest-posts-card.js';
 
 ( function() {
 	/**
