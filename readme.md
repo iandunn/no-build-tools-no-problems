@@ -23,7 +23,7 @@ You can run the same `source/` scripts in production if you'd like. For smaller 
 
 If that's where you're at, you can `rm .gitignore babel.config.js package.json package-lock.json`, and revel in how tidy your root folder is.
 
-If you're building a CPU-heavy project, want to integrate NPM modules, or need to support older browsers, then you can add a build step for production files. You'll still be able to develop locally without any tooling, though.
+If you're building a CPU-heavy project, want to integrate CommonJS modules, or need to support older browsers, then you can add a build step for production files. You'll still be able to develop locally without any tooling, though.
 
 1. `npm install`
 1. `npm run build`

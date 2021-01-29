@@ -57,6 +57,12 @@ function __return_placeholder_div( $id = '' ) {
 	<?php
 }
 
+// this prevents waterfall-loading in chrome
+// other browsers don't support `modulepreload` yet :(
+//
+// maybe this isn't needed for local development b/c it's already fast enough?
+// and it wouldn't be needed for prod b/c the build step would concat the files anyway, and this would load from the build/ folder
+//
 // call during wp_head and/or admin_head
 	// better action?
 // ideally would just wp_enqueue_script and automatically have type="module" and corresponding <link rel="preload" ...>
@@ -66,7 +72,10 @@ function preload_modules( $plugin_folder ) {
 	printf( '<link rel="modulepreload" href="https://unpkg.com/htm?module" />' );
 
 	$plugin_folder = untrailingslashit( $plugin_folder );
-	$files         = glob( $plugin_folder . "/{,*/,*/*/,*/*/*/}*.js", GLOB_BRACE );
+
+	// in real world applicatiosns we probably don't want to preload everything, but only the critical/top-level modules
+	// this function could accept a param w/ an array of urls, or wp_enqueue_script could have a way of marking scripts as critical, etc
+	$files = glob( $plugin_folder . "/{,*/,*/*/,*/*/*/}*.js", GLOB_BRACE );
 
 	foreach ( $files as $file ) {
 		$url = plugins_url( basename( $file ), $file );
