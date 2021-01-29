@@ -8,7 +8,7 @@ const { render, createElement } = window.wp.element;
 /**
  * Internal dependencies
  */
-import { LatestPostsCard } from './components/latest-posts-card.js';
+import { MainView } from './components/main.js';
 
 ( function() {
 	/**
@@ -21,7 +21,7 @@ import { LatestPostsCard } from './components/latest-posts-card.js';
 
 		if ( container ) {
 			render(
-				createElement( LatestPostsCard, props ),
+				createElement( MainView, props ),
 				container
 			);
 
@@ -31,6 +31,6 @@ import { LatestPostsCard } from './components/latest-posts-card.js';
 
 	document.addEventListener( 'DOMContentLoaded', init );
 		// this is slow, can we just wait until #wpbody-content is loaded?
-		// only slow b/c dev console open and caching disabled? mostly yeah
+		// only slow b/c dev console network tab open and caching disabled? mostly yeah
 		// is there a good way to fix that though? that still sucks
 }() );

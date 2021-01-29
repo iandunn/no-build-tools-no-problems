@@ -51,27 +51,23 @@ export class LatestPostsCard extends Component {
 		const { loaded, loading, posts } = this.state;
 
 		return html`
-			<div className="wrap">
-				<h1>No Build Tools, No Problems</h1>
+			<${ Card }>
+				<${ CardHeader }>
+					Latest Posts
+				<//>
 
-				<${ Card }>
-					<${ CardHeader }>
-						Latest Posts
-					<//>
+				<${ CardBody }>
+					<p>
+						this shows some interactivity, you can use gutenberg components like apiFetch, Card, etc
+					</p>
 
-					<${ CardBody }>
-						<p>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-						</p>
+					${ ( loaded || loading ) && PostList( { posts, loading } ) }
 
-						${ ( loaded || loading ) && PostList( { posts, loading } ) }
-
-						<${ Button } isPrimary onClick=${ this.fetchPosts }>
-							${ loaded ? 'Reload' : 'Load' }
-						<//>
+					<${ Button } isPrimary onClick=${ this.fetchPosts }>
+						${ loaded ? 'Reload' : 'Load' }
 					<//>
 				<//>
-			</div>
+			<//>
 		`;
 	}
 }

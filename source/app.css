@@ -1,9 +1,16 @@
+#toplevel_page_no-build-tools-no-problems-container .cards-container {
+	display: flex;
+	justify-content: center;
+	margin-top: 2em;
+}
+
 #toplevel_page_no-build-tools-no-problems-container .components-card {
 	margin-top: 2em;
 }
 
 #toplevel_page_no-build-tools-no-problems-container .components-card.is-size-medium {
-	max-width: 50%;
+	flex-grow: 1; /* not working */
+	margin-right: 20px;
 }
 
 #toplevel_page_no-build-tools-no-problems-container .components-card ul {
