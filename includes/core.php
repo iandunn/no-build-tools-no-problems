@@ -9,9 +9,9 @@ namespace NoBuildToolsNoProblems\Core;
 add_action( 'admin_enqueue_scripts', function() {
 	wp_register_script(
 		'nbtnp-core',
-		plugins_url( 'source/core.js', __FILE__ ),
+		plugins_url( 'source/core.js', __DIR__ ),
 		array(),
-		filemtime( __DIR__ . '/source/core.js' )
+		filemtime( dirname( __DIR__ ) . '/source/core.js' )
 	);
 }, 9 );
 

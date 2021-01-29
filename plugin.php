@@ -8,7 +8,7 @@
 namespace NoBuildToolsNoProblems;
 
 // This is the stuff the Core could potentially provide to plugins.
-require __DIR__ . '/core.php';
+require __DIR__ . '/includes/core.php';
 // Below this is stuff the plugin would need to do itself.
 
 const USE_BUILD_STEP = false;
