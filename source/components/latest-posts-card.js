@@ -5,7 +5,6 @@ const { Button, Card, CardHeader, CardBody } = window.wp.components;
 const { Component } = window.wp.element;
 const html = window.wp.html;
 
-
 /**
  * Internal dependencies
  */

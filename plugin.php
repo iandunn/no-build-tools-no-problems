@@ -24,7 +24,7 @@ add_action( 'admin_menu', function() {
 } );
 
 add_action( 'admin_enqueue_scripts', function() {
-	$path         = ! USE_BUILD_STEP || SCRIPT_DEBUG ? 'source/app.js' : 'build/app.min.js';
+	$folder       = USE_BUILD_STEP ? 'build' : 'source';
 	$dependencies = array( 'wp-element', 'wp-components' );
 
 	if ( ! USE_BUILD_STEP ) {
@@ -33,9 +33,9 @@ add_action( 'admin_enqueue_scripts', function() {
 
 	wp_enqueue_script(
 		'no-build-tools-no-problems',
-		plugins_url( $path, __FILE__ ),
+		plugins_url( "$folder/app.js", __FILE__ ),
 		$dependencies,
-		filemtime( __DIR__ . "/$path" )
+		filemtime( __DIR__ . "/$folder/app.js" )
 	);
 
 	wp_enqueue_style(

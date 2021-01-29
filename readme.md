@@ -14,12 +14,14 @@ Seriously, that's it 🥃 🍰
 
 _( at least, in theory. let's find out what the real-world tradeoffs and limitations are... )_
 
+The stuff in `package.json`, etc are optional enhancements (see below).
+
 
 ### Production Environment
 
 You can run the same `source/` scripts in production if you'd like. For smaller projects, or new-to-JS devs, that can be a great entry point.
 
-As your project grows, you may want to add a build step to increase performance. It's optional, though.
+As your project grows, you may want to add a build step to optimize performance or support older browsers. It's optional, though.
 
 1. Change `USE_BUILD_STEP` in `plugin.php` to `true`
 1. `npm install`

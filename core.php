@@ -23,11 +23,6 @@ add_action( 'admin_enqueue_scripts', function() {
  * workaround until https://core.trac.wordpress.org/ticket/12009 or https://core.trac.wordpress.org/ticket/22249 are fixed
  */
 add_filter( 'script_loader_tag', function( $tag, $handle, $src ) {
-	if ( ! SCRIPT_DEBUG ) {
-		// this and other instances need to check if it's defined too, can't assume it's defined as false instead of just not defined at all
-		return $tag;
-	}
-
 	$modules = array( 'no-build-tools-no-problems', 'nbtnp-core' );
 
 	if ( ! in_array( $handle, $modules, true ) ) {
