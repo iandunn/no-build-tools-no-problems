@@ -11,7 +11,7 @@ add_action( 'admin_enqueue_scripts', function() {
 	wp_register_script(
 		'nbtnp-core',
 		plugins_url( 'core/core.js', __DIR__ ),
-		array(),
+		array( 'wp-element' ),
 		filemtime( dirname( __DIR__ ) . '/core/core.js' )
 	);
 	wp_script_add_data( 'nbtnp-core', 'defer', true );

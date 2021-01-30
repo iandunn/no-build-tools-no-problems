@@ -27,6 +27,7 @@ export class LatestPostsCard extends Component {
 	fetchPosts() {
 		this.setState( { loading: true }, () => {
 			// simulate fetching from api
+			// todo replace w/ actual apiFetch() to make sure there aren't any real-world complexities that this is bypassing
 			const timerID = setTimeout( () => {
 				this.setState( {
 					loading: false,

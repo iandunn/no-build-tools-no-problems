@@ -41,6 +41,9 @@ add_action( 'admin_enqueue_scripts', function( $hook_suffix ) {
 		return;
 	}
 
+	$folder       = get_serve_folder();
+	$dependencies = array( 'wp-element', 'wp-components' );
+
 	if ( 'source' === $folder ) {
 		$dependencies[] = 'nbtnp-core';
 	}

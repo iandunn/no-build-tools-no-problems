@@ -18,6 +18,10 @@ export function MainView() {
 				<${LatestPostsCard} />
 
 				<${Charts} />
+
+				<!-- add another card, example of importing ES module that has dependencies. update text for above to be example of CJS module w/ dependencies.
+				important that it has deps b/c that's complexity that has to be accounted for or not real-world poc
+				-->
 			</div>
 		</div>
 	`;
