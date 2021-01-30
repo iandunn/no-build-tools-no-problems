@@ -2,35 +2,34 @@
  * WordPress dependencies
  */
 const { render, createElement } = window.wp.element;
-	// is it ok to do this, or should they be `import`s at start of file?
-	// is that possible without a build tool?
 
 /**
  * Internal dependencies
  */
 import { MainView } from './components/main.js';
 
-( function() {
-	/**
-	 * Initialize the app.
-	 */
-	function init() {
-		const container = document.getElementById( 'toplevel_page_no-build-tools-no-problems-container' );
+/**
+ * Initialize the app.
+ */
+function init() {
+	const container = document.getElementById( 'toplevel_page_no-build-tools-no-problems-container' );
 
-		const props = {};
+	const props = {};
 
-		if ( container ) {
-			render(
-				createElement( MainView, props ),
-				container
-			);
+	if ( container ) {
+		render(
+			createElement( MainView, props ),
+			container
+		);
 
-			container.classList = []; // Remove .loading-content
-		}
+		container.classList = []; // Remove .loading-content
 	}
+}
 
-	document.addEventListener( 'DOMContentLoaded', init );
-		// this is slow, can we just wait until #wpbody-content is loaded?
-		// only slow b/c dev console network tab open and caching disabled? mostly yeah
-		// is there a good way to fix that though? that still sucks
-}() );
+// now that this is defer'd, it's not guaranteed that it'll core.js will finish loading first?
+// will probably break if it doesn't
+//
+// this is slow in ff w/ dev tools open
+// fast when it's closed though. fast in chrome, but at least partially because of `modulepreload`
+// any way to make it faster in ff?
+init();

@@ -50,6 +50,8 @@ add_action( 'admin_enqueue_scripts', function() {
 		$dependencies,
 		filemtime( __DIR__ . "/$folder/index.js" )
 	);
+	wp_script_add_data( 'no-build-tools-no-problems', 'defer', true );
+	wp_script_add_data( 'no-build-tools-no-problems', 'type', 'module' );
 
 	wp_enqueue_style(
 		'no-build-tools-no-problems',
@@ -59,6 +61,6 @@ add_action( 'admin_enqueue_scripts', function() {
 	);
 } );
 
-add_action( 'admin_head', function() {
+add_action( 'admin_enqueue_scripts', function() {
 	preload_modules( __DIR__ . '/'. get_serve_folder() );
-} );
+}, 1 ); // As early as possible inside <head>

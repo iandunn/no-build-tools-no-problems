@@ -14,6 +14,9 @@ add_action( 'admin_enqueue_scripts', function() {
 		array(),
 		filemtime( dirname( __DIR__ ) . '/source/core.js' )
 	);
+	wp_script_add_data( 'nbtnp-core', 'defer', true );
+	wp_script_add_data( 'nbtnp-core', 'type', 'module' );
+
 }, 9 );
 
 /**
@@ -22,15 +25,27 @@ add_action( 'admin_enqueue_scripts', function() {
  * this is necessary for index.js to be able to `import` other files in the plugin
  *
  * workaround until https://core.trac.wordpress.org/ticket/12009 or https://core.trac.wordpress.org/ticket/22249 are fixed
+ *
+ * props georgestephanis, xref https://gist.github.com/georgestephanis/2a84bc55ad23f4dec2cf2464109add59
+ * look at filter_script_loader_tag in twentywtety/wp-rig, prob better
+ *
+ * it may be better to just manually output them in the head, instead of bothering w/ enqueue system, but dependencies are helpful
  */
 add_filter( 'script_loader_tag', function( $tag, $handle, $src ) {
-	$modules = array( 'no-build-tools-no-problems', 'nbtnp-core' );
+	$scripts = wp_scripts();
+	$obj     = $scripts->registered[ $handle ];
 
-	if ( ! in_array( $handle, $modules, true ) ) {
-		return $tag;
+	// todo check that they're not already added
+
+	if ( ! empty( $obj->extra['defer'] ) ) {
+		$tag = str_replace( " src='$src'", " src='$src' defer", $tag );
 	}
 
-	return str_replace( "' id=", "' type='module' id=", $tag );
+	if ( ! empty( $obj->extra['type'] ) ) {
+		$tag = str_replace( " src='$src'", " src='$src' type='{$obj->extra['type']}' ", $tag );
+	}
+
+	return $tag;
 }, 10, 3 );
 
 // rename to "element" to be generic?
