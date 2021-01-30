@@ -30,7 +30,7 @@ function get_serve_folder() {
 
 	if ( ! $folder ) {
 		// cache the result as a static var or something so this can
-		$folder = file_exists( __DIR__ . '/build/app.js' ) ? 'build' : 'source';
+		$folder = file_exists( __DIR__ . '/build/index.js' ) ? 'build' : 'source';
 	}
 
 	return $folder;

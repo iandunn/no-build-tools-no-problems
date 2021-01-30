@@ -19,7 +19,7 @@ add_action( 'admin_enqueue_scripts', function() {
 /**
  * add type=module to script tag
  *
- * this is necessary for app.js to be able to `import` other files in the plugin
+ * this is necessary for index.js to be able to `import` other files in the plugin
  *
  * workaround until https://core.trac.wordpress.org/ticket/12009 or https://core.trac.wordpress.org/ticket/22249 are fixed
  */
@@ -81,7 +81,7 @@ function preload_modules( $plugin_folder ) {
 		$url = plugins_url( basename( $file ), $file );
 
 		// enqueued files need the &ver= param so they match the enqueued url, imports don't
-		$enqueued = in_array( basename( $file ), array( 'core.js', 'app.js' ), true );
+		$enqueued = in_array( basename( $file ), array( 'core.js', 'index.js' ), true );
 
 		if ( $enqueued ) {
 			// ideally wp_enqueue_script would handle this, so that the value is DRY & not tightly coupled between here and plugin.php
