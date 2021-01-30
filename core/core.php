@@ -10,9 +10,9 @@ add_action( 'admin_enqueue_scripts', function() {
 	// This is always loaded from `source/`, because it's not needed when a build step is used.
 	wp_register_script(
 		'nbtnp-core',
-		plugins_url( 'source/core.js', __DIR__ ),
+		plugins_url( 'core/core.js', __DIR__ ),
 		array(),
-		filemtime( dirname( __DIR__ ) . '/source/core.js' )
+		filemtime( dirname( __DIR__ ) . '/core/core.js' )
 	);
 	wp_script_add_data( 'nbtnp-core', 'defer', true );
 	wp_script_add_data( 'nbtnp-core', 'type', 'module' );

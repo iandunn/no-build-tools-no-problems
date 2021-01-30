@@ -9,7 +9,7 @@ namespace NoBuildToolsNoProblems;
 use function NoBuildToolsNoProblems\Core\preload_modules;
 
 // This is the stuff the Core could potentially provide to plugins.
-require __DIR__ . '/includes/core.php';
+require __DIR__ . '/core/core.php';
 // Below this is stuff the plugin would need to do itself.
 
 
@@ -23,7 +23,7 @@ add_action( 'admin_menu', function() {
 	);
 } );
 
-// could maybe go in core.php?
+// this could maybe go in core.php?
 function get_serve_folder() {
 	// Cache the result so we don't have to hit the filesystem every time this is called.
 	static $folder;

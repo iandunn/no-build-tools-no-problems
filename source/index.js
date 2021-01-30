@@ -27,7 +27,7 @@ function init() {
 }
 
 // now that this is defer'd, it's not guaranteed that it'll core.js will finish loading first?
-// will probably break if it doesn't
+// will probably break if it doesn't. maybe index.js should be defered, but core.js shouldn't be?
 //
 // this is slow in ff w/ dev tools open
 // fast when it's closed though. fast in chrome, but at least partially because of `modulepreload`
