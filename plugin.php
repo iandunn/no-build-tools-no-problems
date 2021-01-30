@@ -36,9 +36,10 @@ function get_serve_folder() {
 	return $folder;
 }
 
-add_action( 'admin_enqueue_scripts', function() {
-	$folder       = get_serve_folder();
-	$dependencies = array( 'wp-element', 'wp-components' );
+add_action( 'admin_enqueue_scripts', function( $hook_suffix ) {
+	if ( 'toplevel_page_no-build-tools-no-problems' !== $hook_suffix ) {
+		return;
+	}
 
 	if ( 'source' === $folder ) {
 		$dependencies[] = 'nbtnp-core';
