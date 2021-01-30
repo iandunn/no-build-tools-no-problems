@@ -13,13 +13,10 @@ export function Charts( {  } ) {
 
 			<${ CardBody }>
 				<p>
-					this will show how you can import a CommonJS module from NPM, but import it like an ESM
-					thanks to Snowpack [link]
+					This will be an example of importing a CommonJS module from NPM. It'll be up-converted to an ES module that you can use with a native <code>import</code>.
 				</p>
 
-				<div>
-					some fancy chart here
-				</div>
+				<!-- todo put chart here after solve importing problem -->
 			<//>
 		<//>
 	`;

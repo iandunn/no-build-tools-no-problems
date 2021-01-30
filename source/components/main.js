@@ -8,6 +8,7 @@ const html = window.wp.html;
  */
 import { LatestPostsCard } from './latest-posts-card.js';
 import { Charts } from './charts.js';
+import { PassphraseGenerator } from './passphrase-generator.js';
 
 export function MainView() {
 	return html`
@@ -17,11 +18,13 @@ export function MainView() {
 			<div className="cards-container">
 				<${LatestPostsCard} />
 
-				<${Charts} />
-
-				<!-- add another card, example of importing ES module that has dependencies. update text for above to be example of CJS module w/ dependencies.
+				<!-- add another card, example of importing _ES_ module that has dependencies.
 				important that it has deps b/c that's complexity that has to be accounted for or not real-world poc
 				-->
+
+				<${Charts} />
+
+				<${PassphraseGenerator} />
 			</div>
 		</div>
 	`;

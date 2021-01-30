@@ -24,7 +24,7 @@ export class LatestPostsCard extends Component {
 		this.fetchPosts = this.fetchPosts.bind( this );
 	}
 
-	fetchPosts() {
+	fetchPosts = () => {
 		this.setState( { loading: true }, () => {
 			// simulate fetching from api
 			// todo replace w/ actual apiFetch() to make sure there aren't any real-world complexities that this is bypassing
@@ -48,7 +48,7 @@ export class LatestPostsCard extends Component {
 		} );
 	}
 
-	render() {
+	render = () => {
 		const { loaded, loading, posts } = this.state;
 
 		return html`
