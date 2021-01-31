@@ -21,3 +21,16 @@
 #toplevel_page_no-build-tools-no-problems-container .components-spinner {
 	margin-bottom: 1em;
 }
+
+#toplevel_page_no-build-tools-no-problems-container .passphrase-strength.low {
+	color: red;
+}
+
+#toplevel_page_no-build-tools-no-problems-container .passphrase-strength.medium {
+	color: orange;
+}
+
+#toplevel_page_no-build-tools-no-problems-container .passphrase-strength.high,
+#toplevel_page_no-build-tools-no-problems-container .passphrase-strength.ideal{
+	color: green;
+}

@@ -63,11 +63,14 @@ export class PassphraseGenerator extends Component {
 					</p>
 
 					<p>
-						<strong>Strength:</strong> ${ strength }
+						<strong>Strength:</strong> ${ ' ' }
+						<span className="passphrase-strength ${ strength.toLowerCase() }">
+							${ strength }
+						</span>
 					</p>
 
 					<p>
-						<strong>argon2 hash:</strong> ${ hash }
+						<strong>argon2 hash:</strong> <code>${ hash }</code>
 					</p>
 				<//>
 			<//>
