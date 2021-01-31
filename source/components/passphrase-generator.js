@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 const { Card, CardHeader, CardBody, Notice, RangeControl } = wp.components;
-const { Component } = wp.element;
+const { Component, Fragment } = wp.element;
 const html = wp.html;
 const { shuffle } = lodash;
 
@@ -56,33 +56,35 @@ export class PassphraseGenerator extends Component {
 					` }
 
 					${ dependenciesAvailable && html`
-						<p>
-							This will show a mix of imported ES and CommonJS modules (with dependencies), for additional testing.
-						</p>
+						<${ Fragment }>
+							<p>
+								This will show a mix of imported ES and CommonJS modules (with dependencies), for additional testing.
+							</p>
 
-						<${ RangeControl }
-							label="Number of Words"
-							marks=${ true }
-							max=10
-							min=3
-							value=${ numberOfWords }
-							onChange=${ value => this.generate( value ) }
-						/>
+							<${ RangeControl }
+								label="Number of Words"
+								marks=${ true }
+								max=10
+								min=3
+								value=${ numberOfWords }
+								onChange=${ value => this.generate( value ) }
+							/>
 
-						<p>
-							<strong>Passphrase:</strong> ${ passphrase }
-						</p>
+							<p>
+								<strong>Passphrase:</strong> ${ passphrase }
+							</p>
 
-						<p>
-							<strong>Strength:</strong> ${ ' ' }
-							<span className="passphrase-strength ${ strength.toLowerCase() }">
-								${ strength }
-							</span>
-						</p>
+							<p>
+								<strong>Strength:</strong> ${ ' ' }
+								<span className="passphrase-strength ${ strength.toLowerCase() }">
+									${ strength }
+								</span>
+							</p>
 
-						<p>
-							<strong>argon2 hash:</strong> <code>${ hash }</code>
-						</p>
+							<p>
+								<strong>argon2 hash:</strong> <code>${ hash }</code>
+							</p>
+						<//>
 					` }
 				<//>
 			<//>
