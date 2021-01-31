@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-const { Card, CardHeader, CardBody, RangeControl } = window.wp.components;
+const { Card, CardHeader, CardBody, Notice, RangeControl } = wp.components;
 const { Component } = wp.element;
 const html = wp.html;
 const { shuffle } = lodash;
@@ -40,6 +40,8 @@ export class PassphraseGenerator extends Component {
 	render = () => {
 		const { numberOfWords, passphrase, strength, hash } = this.state;
 
+		const dependenciesAvailable = true; // stub. need to put in state and avoid generate() ?
+
 		return html`
 			<${ Card }>
 				<${ CardHeader }>
@@ -47,33 +49,41 @@ export class PassphraseGenerator extends Component {
 				<//>
 
 				<${ CardBody }>
-					<p>
-						This will show a mix of imported ES and CommonJS modules (with dependencies), for additional testing.
-					</p>
+					${ ! dependenciesAvailable && html`
+						<${ Notice } status="error" isDismissible=${ false } >
+							This card relies on 3rd party dependencies, please run <code>npm install</code> to use it.
+						<//>
+					` }
 
-					<${ RangeControl }
-						label="Number of Words"
-						marks=${ true }
-						max=10
-						min=3
-						value=${ numberOfWords }
-						onChange=${ value => this.generate( value ) }
-					/>
+					${ dependenciesAvailable && html`
+						<p>
+							This will show a mix of imported ES and CommonJS modules (with dependencies), for additional testing.
+						</p>
 
-					<p>
-						<strong>Passphrase:</strong> ${ passphrase }
-					</p>
+						<${ RangeControl }
+							label="Number of Words"
+							marks=${ true }
+							max=10
+							min=3
+							value=${ numberOfWords }
+							onChange=${ value => this.generate( value ) }
+						/>
 
-					<p>
-						<strong>Strength:</strong> ${ ' ' }
-						<span className="passphrase-strength ${ strength.toLowerCase() }">
-							${ strength }
-						</span>
-					</p>
+						<p>
+							<strong>Passphrase:</strong> ${ passphrase }
+						</p>
 
-					<p>
-						<strong>argon2 hash:</strong> <code>${ hash }</code>
-					</p>
+						<p>
+							<strong>Strength:</strong> ${ ' ' }
+							<span className="passphrase-strength ${ strength.toLowerCase() }">
+								${ strength }
+							</span>
+						</p>
+
+						<p>
+							<strong>argon2 hash:</strong> <code>${ hash }</code>
+						</p>
+					` }
 				<//>
 			<//>
 		`;

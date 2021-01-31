@@ -9,6 +9,6 @@
 		"babel-plugin-htm": "^3.0.0"
 	},
 	"scripts": {
-		"build": "babel source -d build",
+		"build": "babel source -d build"
 	}
 }

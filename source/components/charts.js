@@ -1,9 +1,12 @@
 /**
  * WordPress dependencies
  */
-const { Card, CardHeader, CardBody } = window.wp.components;
+const { Card, CardHeader, CardBody, Notice } = wp.components;
+const { Fragment } = wp.element;
 const html = wp.html;
 
+export function Charts() {
+	const dependenciesAvailable = true; // stub
 
 	return html`
 		<${ Card }>
@@ -12,24 +15,26 @@ const html = wp.html;
 			<//>
 
 			<${ CardBody }>
-                <p>
-                This will be an example of importing a CommonJS module from NPM. It'll be up-converted to an ES module that you can use with a native <code>import</code>.
+				${ ! dependenciesAvailable && html`
+					<${ Notice } status="error" isDismissible=${ false } >
+						This card relies on 3rd party dependencies, please run <code>npm install</code> to use it.
+					<//>
+				` }
 
-                <!--
-                if module was included
-                this will show how you can import a CommonJS module from NPM, but import it like an ESM
-                thanks to Snowpack [link]
+				${ dependenciesAvailable && html`
+				    <${ Fragment }>
+						<p>
+							This will be an example of importing a CommonJS module from NPM. It'll be up-converted to an ES module that you can use with a native <code>import</code>.
+						</p>
 
-                else
-                running 'npm install' is required for this to work, even if you're not using a build step
-                -->
-                </p>
-
-				<${ ReactChart } />
+						<${ ReactChart } />
+					<//>
+				` }
 			<//>
 		<//>
 	`;
 }
+
 
 
 
