@@ -23,6 +23,10 @@ add_action( 'admin_menu', function() {
 	);
 } );
 
+add_action( 'admin_enqueue_scripts', function() {
+	preload_modules( __DIR__ . '/'. get_serve_folder() );
+}, 1 ); // As early as possible inside <head>
+
 // this could maybe go in core.php?
 function get_serve_folder() {
 	// Cache the result so we don't have to hit the filesystem every time this is called.
@@ -35,6 +39,16 @@ function get_serve_folder() {
 
 	return $folder;
 }
+
+// enqueue 3rd-party dependencies temporarily until they can be imported
+add_action( 'admin_enqueue_scripts', function( $hook_suffix ) {
+	wp_enqueue_script(
+		'chart.js',
+		plugins_url( "node_modules/chart.js/dist/Chart.js", __FILE__ ),
+		array(),
+		filemtime( __DIR__ . "/node_modules/chart.js/dist/Chart.js" )
+	);
+}, 9 );
 
 add_action( 'admin_enqueue_scripts', function( $hook_suffix ) {
 	if ( 'toplevel_page_no-build-tools-no-problems' !== $hook_suffix ) {
@@ -64,7 +78,3 @@ add_action( 'admin_enqueue_scripts', function( $hook_suffix ) {
 		filemtime( __DIR__ . '/source/app.css' )
 	);
 } );
-
-add_action( 'admin_enqueue_scripts', function() {
-	preload_modules( __DIR__ . '/'. get_serve_folder() );
-}, 1 ); // As early as possible inside <head>
