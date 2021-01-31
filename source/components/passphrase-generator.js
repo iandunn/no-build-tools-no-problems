@@ -7,10 +7,14 @@ const html = wp.html;
 const { shuffle } = lodash;
 
 import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
+	// add exact ver, subpath, etc
+
 // todo it has an es module. import it from local install, but need it bundled into build dir? see #1
 // maybe if use import maps shim and: import { v4 as uuidv4 } from 'uuid';
 // is there a simpler solution? maybe just a build script that copies dependencies into build/, and `import` by path?
 // maybe have webpack bundle _only the dependencies_ ? or use snowpack to do it & convert cjs to esj?
+
+import { default as entropy } from 'https://jspm.dev/npm:ideal-password@2.3';
 
 
 export class PassphraseGenerator extends Component {
@@ -18,7 +22,14 @@ export class PassphraseGenerator extends Component {
 		super( props );
 	}
 
+	// Set default state.
 	componentWillMount = () => {
+		// todo this is just until diceware is working. after that you should get higher scores and be able to use the default config
+		entropy.config( {
+			minAcceptable: 60,
+			minIdeal: 73
+		} );
+
 		this.generate( 6 );
 	}
 
@@ -28,9 +39,14 @@ export class PassphraseGenerator extends Component {
 		const passphrase = shuffle( stubWords.split( ' ' ) ).slice( 0, numberOfWords ).join( ' ' );
 			// stub. use eff-diceware-passphrase - cjs, has deps
 
-		const stubKey = Math.round( Math.random() * ( 3 - 0 ) + 0 );
-		const strength = [ 'Low', 'Medium', 'High', 'Ideal' ][ stubKey ];
-			// stub. use https://www.npmjs.com/package/ideal-password - cjs, has deps
+		const score = entropy( passphrase );
+		let strength = 'Very Weak';
+
+		if ( score.ideal ) {
+			strength = 'Ideal';
+		} else if ( score.acceptable ) {
+			strength = 'Acceptable';
+		}
 
 		const userId = uuidv4();
 		const hash = shuffle( 'abcdefghijklmopqrstuvwxyz1234567890' ).concat( userId ); // simulating a salt
@@ -78,7 +94,7 @@ export class PassphraseGenerator extends Component {
 
 							<p>
 								<strong>Strength:</strong> ${ ' ' }
-								<span className="passphrase-strength ${ strength.toLowerCase() }">
+								<span className="passphrase-strength ${ strength.toLowerCase().replace( ' ', '-' ) }">
 									${ strength }
 								</span>
 							</p>

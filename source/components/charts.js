@@ -153,6 +153,7 @@ class ReactChart extends React.Component {
 
 	render() {
 		return (
+			// should be able to just use `class` instead of classname b/c using HTM, right? but react still complains
 			html`
                 <div className="App">
                   <div className="sub chart-wrapper">

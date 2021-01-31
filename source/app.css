@@ -20,16 +20,15 @@
 	margin-bottom: 1em;
 }
 
-#toplevel_page_no-build-tools-no-problems-container .passphrase-strength.low {
+#toplevel_page_no-build-tools-no-problems-container .passphrase-strength.very-weak {
 	color: #dc3232;
 }
 
-#toplevel_page_no-build-tools-no-problems-container .passphrase-strength.medium {
+#toplevel_page_no-build-tools-no-problems-container .passphrase-strength.acceptable {
 	color: #ffb900;
 }
 
-#toplevel_page_no-build-tools-no-problems-container .passphrase-strength.high,
-#toplevel_page_no-build-tools-no-problems-container .passphrase-strength.ideal{
+#toplevel_page_no-build-tools-no-problems-container .passphrase-strength.ideal {
 	color: #46b450;
 }
 

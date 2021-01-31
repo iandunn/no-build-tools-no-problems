@@ -55,5 +55,7 @@ If we can get this approach working well for a range of small/medium-sized plugi
 ### Additional "buildless" Resources / Inspiration
 
 * _Don't Build That App!_ by Luke Jackson [ [article](https://formidable.com/blog/2019/no-build-step/) | [presentation](https://www.youtube.com/watch?v=mVjZQrsXBQE) ].
+* [A Future Without Webpack](https://www.pika.dev/blog/pika-web-a-future-without-webpack) by Pika.
 * _[Developing Without a Build](https://dev.to/open-wc/developing-without-a-build-1-introduction-26ao)_ by Lars den Bakker.
+* _["...but at what cost?"](https://github.com/lukejacksonn/perflink/issues/15#issuecomment-480509410)_ by Luke Jackson
 * _[How it feels to learn JavaScript in 2016](https://hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f)_ by Jose Aguinaga, still relevant in 2021.
