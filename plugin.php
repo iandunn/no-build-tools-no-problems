@@ -57,6 +57,7 @@ add_action( 'admin_enqueue_scripts', function( $hook_suffix ) {
 
 	$folder       = get_serve_folder();
 	$dependencies = array( 'wp-element', 'wp-components', 'wp-api-fetch' );
+	$dependencies[] = 'lodash'; // just temporary for passphrase stub
 
 	if ( 'source' === $folder ) {
 		$dependencies[] = 'nbtnp-core';

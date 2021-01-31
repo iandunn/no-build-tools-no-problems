@@ -6,8 +6,12 @@ const { Component, Fragment } = wp.element;
 const html = wp.html;
 const { shuffle } = lodash;
 
-//import { v4 as uuidv4 } from 'https://jspm.dev/uuid'; todo tmp
-//console.log(uuidv4()); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
+import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
+// todo it has an es module. import it from local install, but need it bundled into build dir? see #1
+// maybe if use import maps shim and: import { v4 as uuidv4 } from 'uuid';
+// is there a simpler solution? maybe just a build script that copies dependencies into build/, and `import` by path?
+// maybe have webpack bundle _only the dependencies_ ? or use snowpack to do it & convert cjs to esj?
+
 
 export class PassphraseGenerator extends Component {
 	constructor( props ) {
@@ -22,17 +26,15 @@ export class PassphraseGenerator extends Component {
 	generate = ( numberOfWords ) => {
 		const stubWords = 'correct horse battery staple tacos quesadillas enchiladas ramones clash operation ivy';
 		const passphrase = shuffle( stubWords.split( ' ' ) ).slice( 0, numberOfWords ).join( ' ' );
-			// stub. use eff-diceware-passphrase
+			// stub. use eff-diceware-passphrase - cjs, has deps
 
 		const stubKey = Math.round( Math.random() * ( 3 - 0 ) + 0 );
 		const strength = [ 'Low', 'Medium', 'High', 'Ideal' ][ stubKey ];
-			// stub. use https://www.npmjs.com/package/ideal-password - commonjs, has deps
+			// stub. use https://www.npmjs.com/package/ideal-password - cjs, has deps
 
-		const userId = shuffle( 'abcdefghijklmopqrstuvwxyz' ).splice( 0, 12 );
-			// stub, use `uuid` package
-
+		const userId = uuidv4();
 		const hash = shuffle( 'abcdefghijklmopqrstuvwxyz1234567890' ).concat( userId ); // simulating a salt
-			// stub. use https://www.npmjs.com/package/secure-password or https://www.npmjs.com/package/argon2 probably
+			// stub. use https://www.npmjs.com/package/secure-password (cjs, has deps); or https://www.npmjs.com/package/argon2 (cjs, has deps)
 
 		this.setState( { numberOfWords, passphrase, strength, hash } )
 	}
