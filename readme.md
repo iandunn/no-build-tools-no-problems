@@ -50,3 +50,10 @@ That's not to hate on ACF, they've done a great thing by making it simple. But i
 Right now this is just a proof-of-concept. Fork it and play around with it, see if it's useful in some real-world projects, etc. Give feedback by [reporting bugs & feature requests](https://github.com/iandunn/no-build-tools-no-problems/issues), and [starting discussions](https://github.com/iandunn/no-build-tools-no-problems/discussions). What kinds of problems or limitations do you run into? What's needed to make this live up to the vision?
 
 If we can get this approach working well for a range of small/medium-sized plugins, then we can make a proposal for Core to support it, so that everything in `core/` will be provided to plugins automatically.
+
+
+### Additional "buildless" Resources / Inspiration
+
+* _Don't Build That App!_ by Luke Jackson [ [article](https://formidable.com/blog/2019/no-build-step/) | [presentation](https://www.youtube.com/watch?v=mVjZQrsXBQE) ].
+* _[Developing Without a Build](https://dev.to/open-wc/developing-without-a-build-1-introduction-26ao)_ by Lars den Bakker.
+* _[How it feels to learn JavaScript in 2016](https://hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f)_ by Jose Aguinaga, still relevant in 2021.
