@@ -13,11 +13,17 @@ export function PostList( { posts, loading } ) {
 		`;
 	}
 
+	if ( ! posts.length ) {
+		return html`<p>No posts available.</p>`;
+	}
+
 	return html`
 		<ul>
 			${ posts.map( post => html`
 				<li key="${ post.id }">
-					${ post.title }
+					<a href="${ post.link }">
+						${ post.title.rendered }
+					</a>
 				</li>
 			` ) }
 		</ul>

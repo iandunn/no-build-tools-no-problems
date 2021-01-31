@@ -4,6 +4,7 @@
 const { Button, Card, CardHeader, CardBody } = window.wp.components;
 const { Component } = window.wp.element;
 const html = window.wp.html;
+const apiFetch = window.wp.apiFetch;
 
 /**
  * Internal dependencies
@@ -25,26 +26,23 @@ export class LatestPostsCard extends Component {
 	}
 
 	fetchPosts = () => {
-		this.setState( { loading: true }, () => {
-			// simulate fetching from api
-			// todo replace w/ actual apiFetch() to make sure there aren't any real-world complexities that this is bypassing
-			const timerID = setTimeout( () => {
-				this.setState( {
-					loading: false,
-					loaded: true,
-					posts: [
-						{
-							id: 1,
-							title: "Hello World",
-						},
+		this.setState( { loading: true }, async () => {
+			const postQueryParams = new URLSearchParams( {
+				_fields: 'id,title,link',
+				per_page: 5,
+			} );
 
-						{
-							id: 2,
-							title: "Goodbye World",
-						},
-					],
-				} );
-			}, 700 )
+			const fetchParams = {
+				path : '/wp/v2/posts?' + postQueryParams.toString(),
+			};
+
+			const posts = await apiFetch( fetchParams );
+
+			this.setState( {
+				loading: false,
+				loaded: true,
+				posts,
+			} );
 		} );
 	}
 
@@ -59,7 +57,7 @@ export class LatestPostsCard extends Component {
 
 				<${ CardBody }>
 					<p>
-						this shows some interactivity, you can use gutenberg components like apiFetch, Card, etc
+						This shows using some components/utilities bundled with WordPress/Gutenberg, like <code>Card</code> and <code>apiFetch</code>.
 					</p>
 
 					${ ( loaded || loading ) && PostList( { posts, loading } ) }
