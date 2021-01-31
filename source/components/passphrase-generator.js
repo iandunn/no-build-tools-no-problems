@@ -42,7 +42,7 @@ export class PassphraseGenerator extends Component {
 	render = () => {
 		const { numberOfWords, passphrase, strength, hash } = this.state;
 
-		const dependenciesAvailable = true; // stub. need to put in state and avoid generate() ?
+		const dependenciesAvailable = true; // stub. need to put in state and avoid generate() when false?
 
 		return html`
 			<${ Card }>

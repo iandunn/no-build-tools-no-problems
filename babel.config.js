@@ -9,6 +9,7 @@ module.exports = function ( api ) {
 
 	const plugins = [
 		[ 'htm', { 'pragma': 'React.createElement' } ],
+		"@babel/plugin-proposal-class-properties"
 	];
 
 	return {
