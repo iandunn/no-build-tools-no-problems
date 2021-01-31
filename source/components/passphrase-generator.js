@@ -2,9 +2,9 @@
  * WordPress dependencies
  */
 const { Card, CardHeader, CardBody, RangeControl } = window.wp.components;
-const { Component } = window.wp.element;
-const html = window.wp.html;
-const { shuffle } = window.lodash;
+const { Component } = wp.element;
+const html = wp.html;
+const { shuffle } = lodash;
 
 //import { v4 as uuidv4 } from 'https://jspm.dev/uuid'; todo tmp
 //console.log(uuidv4()); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'

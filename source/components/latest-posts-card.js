@@ -1,10 +1,10 @@
 /**
  * WordPress dependencies
  */
-const { Button, Card, CardHeader, CardBody } = window.wp.components;
-const { Component } = window.wp.element;
-const html = window.wp.html;
-const apiFetch = window.wp.apiFetch;
+const { Button, Card, CardHeader, CardBody } = wp.components;
+const { Component } = wp.element;
+const html = wp.html;
+const apiFetch = wp.apiFetch;
 
 /**
  * Internal dependencies

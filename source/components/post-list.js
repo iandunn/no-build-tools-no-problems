@@ -1,8 +1,8 @@
 /**
  * WordPress dependencies
  */
-const { Spinner } = window.wp.components;
-const html = window.wp.html;
+const { Spinner } = wp.components;
+const html = wp.html;
 
 export function PostList( { posts, loading } ) {
 	if ( loading ) {

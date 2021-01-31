@@ -5,7 +5,7 @@
 /**
  * WordPress dependencies
  */
-const { createElement } = window.wp.element;
+const { createElement } = wp.element;
 
 window.wp = window.wp || {};
 
@@ -25,4 +25,4 @@ import htm from 'https://unpkg.com/htm@3.0.4/dist/htm.module.js?module'
 	// just import from `./core/htm.js`, then wp.htm
 
 // Large projects wouldn't want to use this in production, but small/medium could just fine.
-window.wp.html = htm.bind( createElement );
+wp.html = htm.bind( createElement );

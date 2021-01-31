@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-const { render, createElement } = window.wp.element;
+const { render, createElement } = wp.element;
 
 /**
  * Internal dependencies

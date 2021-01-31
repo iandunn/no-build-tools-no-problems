@@ -2,9 +2,9 @@
  * WordPress dependencies
  */
 const { Card, CardHeader, CardBody } = window.wp.components;
-const html = window.wp.html;
+const html = wp.html;
 
-export function Charts( {} ) {
+
 	return html`
 		<${ Card }>
 			<${ CardHeader }>

@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-const html = window.wp.html;
+const html = wp.html;
 
 /**
  * Internal dependencies
