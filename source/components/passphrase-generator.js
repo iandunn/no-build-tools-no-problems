@@ -82,7 +82,12 @@ export class PassphraseGenerator extends Component {
 							</p>
 
 							<p>
-								<strong>argon2 hash:</strong> <code>${ hash }</code>
+								<strong>argon2 hash:</strong>
+								<span className="passphrase-hash">
+									<code>
+										${ hash }
+									</code>
+								</span>
 							</p>
 						<//>
 					` }

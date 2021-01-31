@@ -1,16 +1,14 @@
 #toplevel_page_no-build-tools-no-problems-container .cards-container {
 	display: flex;
-	justify-content: center;
+	flex-wrap: wrap;
 	margin-top: 2em;
 }
 
 #toplevel_page_no-build-tools-no-problems-container .components-card {
-	margin-top: 2em;
-}
-
-#toplevel_page_no-build-tools-no-problems-container .components-card.is-size-medium {
-	flex-grow: 1; /* not working */
-	margin-right: 20px;
+	flex-grow: 1;
+	min-width: 300px;
+	max-width: 450px;
+	margin: 2em 20px 2em 0;
 }
 
 #toplevel_page_no-build-tools-no-problems-container .components-card ul {
@@ -23,14 +21,19 @@
 }
 
 #toplevel_page_no-build-tools-no-problems-container .passphrase-strength.low {
-	color: red;
+	color: #dc3232;
 }
 
 #toplevel_page_no-build-tools-no-problems-container .passphrase-strength.medium {
-	color: orange;
+	color: #ffb900;
 }
 
 #toplevel_page_no-build-tools-no-problems-container .passphrase-strength.high,
 #toplevel_page_no-build-tools-no-problems-container .passphrase-strength.ideal{
-	color: green;
+	color: #46b450;
+}
+
+#toplevel_page_no-build-tools-no-problems-container .passphrase-hash {
+	display: inline-block;
+	overflow-wrap: anywhere;
 }

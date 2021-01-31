@@ -42,11 +42,11 @@ If we want the vast majority of WP developers to build rich JS applications, the
 
 Right now there's a big wall between most folks and building what they want, in the ways that we want them to build it. If we don't make it simple, the closest that most devs _(and their users)_ will ever get to the promise of Gutenberg is [blocks built in PHP](https://www.advancedcustomfields.com/resources/blocks/).
 
-That's not to hate on ACF, they've done a great thing by making it simple. But if we want folks to learn build seamless dynamic interfaces, then we have to internalize the importance of simplicity again. Until we re-learn that lesson, we won't be able to make modern JS development in WordPress something that's accessible to everyone.
+That's not to hate on ACF, they've done a great thing by making it simple. But if we want folks to build seamless dynamic interfaces, then we have to internalize the importance of simplicity again. Until we re-learn that lesson, we won't be able to make modern JS development in WordPress something that's accessible to everyone.
 
 
 ### Help Wanted
 
 Right now this is just a proof-of-concept. Fork it and play around with it, see if it's useful in some real-world projects, etc. Give feedback by [reporting bugs & feature requests](https://github.com/iandunn/no-build-tools-no-problems/issues), and [starting discussions](https://github.com/iandunn/no-build-tools-no-problems/discussions). What kinds of problems or limitations do you run into? What's needed to make this live up to the vision?
 
-if we can get this approach working well for a range of small/medium-sized plugins, then we can make a proposal for Core to support it, so that everything in `core/` will be provided automatically.
+If we can get this approach working well for a range of small/medium-sized plugins, then we can make a proposal for Core to support it, so that everything in `core/` will be provided to plugins automatically.
