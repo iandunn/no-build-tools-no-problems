@@ -31,6 +31,12 @@ If you're building a large or CPU-intensive project, want to integrate CommonJS 
 1. Once the transpiled files exist in `build/`, the plugin will automatically switch to enqueue them instead of `source/`. That lets you test them before deploying to production.
 1. Once you're done testing, `rm -rf build/*`, and the `source/` files will automatically be enqueued again.
 
+### Results
+
+The plugin creates a wp-admin screen where it demonstrates what can be achieved without any tooling, and some optional enhancements if you do want some tooling.
+
+[![Screenshot of the wp-admin page where features are demonstrated](.github/screenshot.png?raw=true)](.github/screenshot.png?raw=true)
+
 
 ### Why
 
