@@ -56,18 +56,23 @@ export class LatestPostsCard extends Component {
 				<//>
 
 				<${ CardBody }>
-					<p>
-						This shows using some components/utilities bundled with WordPress/Gutenberg, like <code>Button</code> and <code>apiFetch</code>.
-					</p>
+					<div className="card-description">
+						<p>
+							This demonstrates the baseline of how ES6, React, JSX-like templating, and Gutenberg components can all be used without any tooling.
+						</p>
 
-					<p>
-						All of the cards on this page use <a href="https://wordpress.github.io/gutenberg/?path=/story/components-card--default"><code>Card</code></a> as well.
-					</p>
+						<p>
+							<code><a href="https://wordpress.github.io/gutenberg/?path=/story/components-button--primary">Button</a></code> and
+							<code><a href="https://github.com/WordPress/gutenberg/blob/056dd36/packages/api-fetch/README.md">apiFetch</a></code> are used below.
+							All of the cards on this page use <a href="https://wordpress.github.io/gutenberg/?path=/story/components-card--default"><code>Card</code></a> as well.
+							No third-party dependencies are needed beyond what Core currently provides, or could in the future.
+						</p>
+					</div>
 
 					${ ( loaded || loading ) && PostList( { posts, loading } ) }
 
 					<${ Button } isPrimary onClick=${ this.fetchPosts }>
-						${ loaded ? 'Reload' : 'Load' }
+						${ loaded ? 'Reload' : 'Load Posts' }
 					<//>
 				<//>
 			<//>

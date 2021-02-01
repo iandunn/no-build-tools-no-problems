@@ -8,8 +8,6 @@ const html = wp.html;
 import { Doughnut } from 'https://jspm.dev/npm:react-chartjs-2@2.11.1';
 
 export function Charts() {
-	const dependenciesAvailable = true; // not necessary if stick w/ jspm, but leave until sure that won't do any local bundling
-
 	const data = getData();
 	const colors = [ '#a8e0ff', '#8ee3f5', '#70cad1', '#3e517a', '#b08ea2', '#BBB6DF' ];
 
@@ -20,24 +18,17 @@ export function Charts() {
 			<//>
 
 			<${ CardBody }>
-				${ ! dependenciesAvailable && html`
-					<${ Notice } status="error" isDismissible=${ false } >
-						This card relies on 3rd party dependencies, please run <code>npm install</code> to use it.
-					<//>
-				` }
+			    <${ Fragment }>
+					<p className="card-description">
+						This is an example of importing a CommonJS module via <a href="https://jspm.org/">jspm.dev</a>, bypassing the need for any local bundling.
+						It's automatically up-converted to an ES module that you can use with a native <code>import</code>.
+					</p>
 
-				${ dependenciesAvailable && html`
-				    <${ Fragment }>
-						<p>
-							This is an example of importing a CommonJS module via <a href="https://jspm.org/">jspm.dev</a>, bypassing the need for npm's CLI tools. It's automatically up-converted to an ES module that you can use with a native <code>import</code>.
-						</p>
-
-						<${ Doughnut }
-							data=${ data }
-							colors=${ colors }
-						/>
-					<//>
-				` }
+					<${ Doughnut }
+						data=${ data }
+						colors=${ colors }
+					/>
+				<//>
 			<//>
 		<//>
 	`;

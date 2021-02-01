@@ -1,3 +1,13 @@
+/*
+ * todo setup SASS for the password-generator card, but leave the rest of it as vanilla css.
+ *
+ * that'll show how you can optionally incorporate build tools for devex enhancements when it makes sense / is desired,
+ * but still avoid a huge complex toolchain that's very fragile and breaks often
+ */
+
+/*
+ * Global
+ */
 #nbtnp-container .cards-container {
 	display: flex;
 	flex-wrap: wrap;
@@ -20,6 +30,46 @@
 	margin-bottom: 1em;
 }
 
+#nbtnp-container .components-notice.WIP {
+	margin-bottom: 2em;
+}
+
+#nbtnp-container .card-description {
+	margin-bottom: 2em;
+}
+
+
+/*
+ * Latests Posts
+ */
+
+
+/*
+ * Charts
+ */
+
+
+/*
+ * Passphrase Generator
+ */
+#nbtnp-container #passphrase-generator .components-card__header {
+	justify-content: left
+}
+
+#nbtnp-container #passphrase-generator .security-purpose-warning {
+	margin-left: 20px;
+}
+
+#nbtnp-container #passphrase-generator .security-purpose-warning .components-popover__content {
+	max-width: max-content !important;
+		/* otherwise the value Gutenberg automatically sets on the element toggles between 0 and 864px every 100ms. their bug or mine? */
+		/* it's also not wrapping */
+}
+
+#nbtnp-container .number-of-words label {
+	font-weight: 600;
+}
+
 #nbtnp-container .passphrase-strength-label.very-weak {
 	color: #dc3232;
 }
@@ -32,7 +82,9 @@
 	color: #46b450;
 }
 
-#nbtnp-container .passphrase-hash {
-	display: inline-block;
+#nbtnp-container .passphrase-hash code {
+	display: block;
 	overflow-wrap: anywhere;
+	margin: 10px;
+	padding: 5px;
 }
