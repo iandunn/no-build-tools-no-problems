@@ -8,7 +8,7 @@
 	flex-grow: 1;
 	min-width: 300px;
 	max-width: 450px;
-	margin: 2em 20px 2em 0;
+	margin: 2em 20px 0 0;
 }
 
 #toplevel_page_no-build-tools-no-problems-container .components-card ul {

@@ -8,13 +8,13 @@ const { shuffle } = lodash;
 
 import { v4 as uuidv4 } from 'https://jspm.dev/uuid@8.3';
 	// add subpath ?
+import { default as entropy } from 'https://jspm.dev/npm:ideal-password@2.3';
 
-// todo it has an es module. import it from local install, but need it bundled into build dir? see #1
 // maybe if use import maps shim and: import { v4 as uuidv4 } from 'uuid';
+
 // is there a simpler solution? maybe just a build script that copies dependencies into build/, and `import` by path?
 // maybe have webpack bundle _only the dependencies_ ? or use snowpack to do it & convert cjs to esj?
 
-import { default as entropy } from 'https://jspm.dev/npm:ideal-password@2.3';
 
 
 export class PassphraseGenerator extends Component {

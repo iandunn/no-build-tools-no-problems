@@ -57,7 +57,11 @@ export class LatestPostsCard extends Component {
 
 				<${ CardBody }>
 					<p>
-						This shows using some components/utilities bundled with WordPress/Gutenberg, like <code>Card</code> and <code>apiFetch</code>.
+						This shows using some components/utilities bundled with WordPress/Gutenberg, like <code>Button</code> and <code>apiFetch</code>.
+					</p>
+
+					<p>
+						All of the cards on this page use <a href="https://wordpress.github.io/gutenberg/?path=/story/components-card--default"><code>Card</code></a> as well.
 					</p>
 
 					${ ( loaded || loading ) && PostList( { posts, loading } ) }
