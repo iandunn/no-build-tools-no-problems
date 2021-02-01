@@ -1,38 +1,38 @@
-#toplevel_page_no-build-tools-no-problems-container .cards-container {
+#nbtnp-container .cards-container {
 	display: flex;
 	flex-wrap: wrap;
 	margin-top: 2em;
 }
 
-#toplevel_page_no-build-tools-no-problems-container .components-card {
+#nbtnp-container .components-card {
 	flex-grow: 1;
 	min-width: 300px;
 	max-width: 450px;
 	margin: 2em 20px 0 0;
 }
 
-#toplevel_page_no-build-tools-no-problems-container .components-card ul {
+#nbtnp-container .components-card ul {
 	list-style: disc;
 	margin-left: 1em;
 }
 
-#toplevel_page_no-build-tools-no-problems-container .components-spinner {
+#nbtnp-container .components-spinner {
 	margin-bottom: 1em;
 }
 
-#toplevel_page_no-build-tools-no-problems-container .passphrase-strength.very-weak {
+#nbtnp-container .passphrase-strength-label.very-weak {
 	color: #dc3232;
 }
 
-#toplevel_page_no-build-tools-no-problems-container .passphrase-strength.acceptable {
+#nbtnp-container .passphrase-strength-label.acceptable {
 	color: #ffb900;
 }
 
-#toplevel_page_no-build-tools-no-problems-container .passphrase-strength.ideal {
+#nbtnp-container .passphrase-strength-label.ideal {
 	color: #46b450;
 }
 
-#toplevel_page_no-build-tools-no-problems-container .passphrase-hash {
+#nbtnp-container .passphrase-hash {
 	display: inline-block;
 	overflow-wrap: anywhere;
 }

@@ -12,7 +12,7 @@ import { MainView } from './components/main.js';
  * Initialize the app.
  */
 function init() {
-	const container = document.getElementById( 'toplevel_page_no-build-tools-no-problems-container' );
+	const container = document.getElementById( 'nbtnp-container' );
 
 	const props = {};
 

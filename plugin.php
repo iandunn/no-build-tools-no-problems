@@ -6,7 +6,7 @@
  */
 
 namespace NoBuildToolsNoProblems;
-use function NoBuildToolsNoProblems\Core\preload_modules;
+use function NoBuildToolsNoProblems\Core\{ __return_placeholder_div, preload_modules };
 
 // This is the stuff the Core could potentially provide to plugins.
 require __DIR__ . '/core/core.php';
@@ -19,7 +19,12 @@ add_action( 'admin_menu', function() {
 		'No Build Tools, No Problems',
 		'read',
 		'no-build-tools-no-problems',
-		__NAMESPACE__ . '\Core\__return_placeholder_div'
+		function() {
+			// this works, but it'd be nice to be able to pass in an arbitrary id from things like add_menu_page()
+			// `wp_add_dashboard_widget()` provides a `$callback_args` param, which gets passed to the callback.
+			// could add something like that to all Core functions that ask for a callback
+			__return_placeholder_div( 'nbtnp-container' );
+		}
 	);
 } );
 

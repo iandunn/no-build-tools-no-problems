@@ -27,7 +27,7 @@ If you're building a large or CPU-intensive project, want to integrate CommonJS 
 
 1. `npm install`
 1. `npm run build`
-1. Deal with all the normal build tool problems  🙁😞😖🥃😩😢🥃😭😡🥃🤬🥃🥃🥃🥱🛌💤🔁
+1. Deal with all the normal build tool problems  🙁 😞 😖 🥃 😩 😢 🥃 😭 😡 🥃 🤬 🥃 🥃 🥃 🥱 🛌 💤 🔁
 1. Once the transpiled files exist in `build/`, the plugin will automatically switch to enqueue them instead of `source/`. That lets you test them before deploying to production.
 1. Once you're done testing, `rm -rf build/*`, and the `source/` files will automatically be enqueued again.
 
