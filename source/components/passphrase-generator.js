@@ -1,16 +1,23 @@
 /**
  * WordPress dependencies
  */
-const { Card, CardHeader, CardBody, Icon, Notice, RangeControl, Tooltip } = wp.components;
+const { Card, CardHeader, CardBody, Icon, Notice, RangeControl, Spinner, Tooltip } = wp.components;
 const { Component, Fragment } = wp.element;
-const html = wp.html;
-const { shuffle } = lodash;
 
-import { v4 as uuidv4 } from 'https://jspm.dev/uuid@8.3';
+
+/**
+ * External dependencies
+ */
+const html = wp.html;
+const { debounce } = window.lodash;
+
+import { v4 as uuidv4 } from 'https://jspm.dev/uuid@8.3';                    // Native ESM
 	// add subpath ?
-import entropy from 'https://jspm.dev/npm:ideal-password@2.3';
-import diceware from 'https://jspm.dev/npm:diceware-generator@3.0';
-import eff2016Long from 'https://jspm.dev/npm:diceware-wordlist-en-eff@1.0';
+import { argon2id } from 'https://jspm.dev/npm:hash-wasm@4.4';               // Native ESM
+	// add subpath - want https://unpkg.com/browse/hash-wasm@4.4.1/dist/argon2.umd.min.js . update comment b/c this is UMD not ESM
+import entropy from 'https://jspm.dev/npm:ideal-password@2.3';               // CommonJS -> EMS
+import diceware from 'https://jspm.dev/npm:diceware-generator@3.0';          // CommonJS -> EMS
+import eff2016Long from 'https://jspm.dev/npm:diceware-wordlist-en-eff@1.0'; // CommonJS -> EMS
 
 // maybe if use import maps shim and: import { v4 as uuidv4 } from 'uuid';
 
@@ -56,29 +63,77 @@ export class PassphraseGenerator extends Component {
 			strength.label = 'Acceptable';
 		}
 
-		const userId = uuidv4();
-		const hash = shuffle( 'abcdefghijklmopqrstuvwxyz1234567890' ).concat( userId ); // simulating a salt
-			// stub. use https://www.npmjs.com/package/secure-password (cjs, has deps); or https://www.npmjs.com/package/argon2 (cjs, has deps)
-			// those are both node-dependent. need to find one that works in browser. maybe no argon will, so use a weaker one like sha512 or 256
-			// or maybe bcrypt, but note that it's old
+		// The real value will take ~450ms to compute, so give the user visual feedback that something is happening.
+		const hash = html`
+			<${ Spinner } />
+		`;
 
-		this.setState( { numberOfWords, passphrase, strength, hash } )
+		this.setState(
+			{ numberOfWords, passphrase, strength, hash },
+			() => this.setArgon2idHash( passphrase )
+		);
+	}
+
+	async setArgon2idHash( password ) {
+		let startTime;
+		const tune = true; // Flip to true when testing.
+
+		if ( tune ) {
+			startTime = performance.now();
+		}
+
+		const salt = new Uint8Array( 16 );
+		window.crypto.getRandomValues( salt );
+
+		/*
+		 * These parameters should be tuned so that the calculation takes roughly 450ms, to balance security
+		 * and UX.
+		 *
+		 * Changing the `parallelism` param will result in a different hash, so it can't be changed after
+		 * any passwords are stored.
+		 *
+		 * @see https://www.alexedwards.net/blog/how-to-hash-and-verify-passwords-with-argon2-in-go
+		 */
+		const key = await argon2id( {
+			password: password.normalize(), // @see https://github.com/Daninet/hash-wasm#string-encoding-pitfalls
+			salt,
+			parallelism: 1,
+			memorySize: 512, // In kilobytes.
+			//iterations: 75, // This is much lower than you'd want it in a real-world application.
+			iterations: 20, // todo tmp, very low until debouncing implemented
+			hashLength: 32, // In bytes.
+			outputType: 'encoded', // Includes verification parameters.
+		} );
+
+		if ( tune ) {
+			//console.log( { salt, key } );
+			console.log( 'Elapsed time: ' + ( performance.now() - startTime ) + 'ms.' );
+		}
+
+		// todo when the range slider is changes quickly, these get backed up
+		// is there a way to abort the previous requests and just process the latest one?
+			// or just throttle/debounce?
+
+		// once the queueing problem is solved, does that solve the UI being slow? or still need to work on htat?
+			// try tweaking memorySize, see if that helps
+
+		this.setState( { hash: key } );
 	}
 
 	render = () => {
 		const { numberOfWords, passphrase, strength, hash } = this.state;
 		const dependenciesAvailable = true; // todo detect automatically based on the the prescense of window.diceware, etc
+		const userId = uuidv4(); // This isn't used in a meaningful way, it's just here an example of importing a native ES module.
 
 		return html`
 			<${ Card } id="passphrase-generator">
 				<${ CardHeader }>
 					Passphrase Generator
 
-					<!-- todo update if find more secure than bcrypt -->
 					<${Tooltip}
 					    text="
-					        Don't use this as your actual password generator.
-					        This is just for demonstration purposes. bcrypt isn't a modern hashing algorithm, and the entropy scoring hasn't been fine-tuned.
+					        ⚠️ Don't use this as your actual password generator.
+					        This is just for demonstration purposes, and may not provide a secure passphrase, accurate entropy scores, etc.
 					    "
 					    position="top left"
 					>
@@ -110,6 +165,14 @@ export class PassphraseGenerator extends Component {
 							` }
 						</div>
 
+						<p>
+							<strong>User UUID:</strong>
+
+							<code className="block">
+								${ userId }
+							</code>
+						</p>
+
 						<${ RangeControl }
 							className="number-of-words"
 							label="Number of Words"
@@ -121,7 +184,10 @@ export class PassphraseGenerator extends Component {
 						/>
 
 						<p>
-							<strong>Passphrase:</strong> ${ passphrase }
+							<strong>Passphrase:</strong>
+							<code className="block">
+								${ passphrase }
+							</code>
 						</p>
 
 						<p>
@@ -137,9 +203,9 @@ export class PassphraseGenerator extends Component {
 						</p>
 
 						<p>
-							<strong>bcrypt hash:</strong>
+							<strong>Argon2id hash:</strong>
 							<span className="passphrase-hash">
-								<code>
+								<code className="block">
 									${ hash }
 								</code>
 							</span>

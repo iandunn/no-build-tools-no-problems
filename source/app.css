@@ -38,6 +38,13 @@
 	margin-bottom: 2em;
 }
 
+#nbtnp-container code.block {
+	display: block;
+	overflow-wrap: anywhere;
+	margin: 10px;
+	padding: 5px;
+}
+
 
 /*
  * Latests Posts
@@ -60,6 +67,10 @@
 	margin-left: 20px;
 }
 
+#nbtnp-container #passphrase-generator .security-purpose-warning .dashicons-warning::before {
+	color: #f0b849;
+}
+
 #nbtnp-container #passphrase-generator .security-purpose-warning .components-popover__content {
 	max-width: max-content !important;
 		/* otherwise the value Gutenberg automatically sets on the element toggles between 0 and 864px every 100ms. their bug or mine? */
@@ -80,11 +91,4 @@
 
 #nbtnp-container .passphrase-strength-label.ideal {
 	color: #46b450;
-}
-
-#nbtnp-container .passphrase-hash code {
-	display: block;
-	overflow-wrap: anywhere;
-	margin: 10px;
-	padding: 5px;
 }
