@@ -42,12 +42,6 @@ function get_serve_folder() {
 
 // enqueue 3rd-party dependencies temporarily until they can be imported
 add_action( 'admin_enqueue_scripts', function( $hook_suffix ) {
-	wp_enqueue_script(
-		'chart.js',
-		plugins_url( "node_modules/chart.js/dist/Chart.js", __FILE__ ),
-		array(),
-		filemtime( __DIR__ . "/node_modules/chart.js/dist/Chart.js" )
-	);
 }, 9 );
 
 add_action( 'admin_enqueue_scripts', function( $hook_suffix ) {

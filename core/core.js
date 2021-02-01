@@ -13,7 +13,10 @@ window.wp = window.wp || {};
 /**
  * External dependencies
  */
-import htm from 'https://unpkg.com/htm@3.0.4/dist/htm.module.js?module'
+//import htm from 'https://unpkg.com/htm@3.0.4/dist/htm.module.js?module'; // ⚠️ Always explicitly declare the version when importing remotely. See https://www.youtube.com/watch?v=mVjZQrsXBQE (timestamp ?)
+import htm from 'https://jspm.dev/npm:htm@3.0';
+	// add subpath to es module?
+
 // this would eventually be wp-includes/js/dist/htm.js or whatever. using unpkg.com in this context so don't have to add complexity of `npm install` step
 // snowpack.dev could be used to import "bare module specifiers" like `import htm from 'htm'`
 // once #1 is solved, though, could maybe use that instead of importing via URL
@@ -25,4 +28,5 @@ import htm from 'https://unpkg.com/htm@3.0.4/dist/htm.module.js?module'
 	// just import from `./core/htm.js`, then wp.htm
 
 // Large projects wouldn't want to use this in production, but small/medium could just fine.
+	// maybe they would actually -- https://www.youtube.com/watch?v=mVjZQrsXBQE
 wp.html = htm.bind( createElement );

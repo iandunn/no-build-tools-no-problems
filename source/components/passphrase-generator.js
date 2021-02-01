@@ -6,8 +6,8 @@ const { Component, Fragment } = wp.element;
 const html = wp.html;
 const { shuffle } = lodash;
 
-import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
-	// add exact ver, subpath, etc
+import { v4 as uuidv4 } from 'https://jspm.dev/uuid@8.3';
+	// add subpath ?
 
 // todo it has an es module. import it from local install, but need it bundled into build dir? see #1
 // maybe if use import maps shim and: import { v4 as uuidv4 } from 'uuid';
@@ -40,6 +40,7 @@ export class PassphraseGenerator extends Component {
 			// stub. use eff-diceware-passphrase - cjs, has deps
 
 		const score = entropy( passphrase );
+
 		let strength = 'Very Weak';
 
 		if ( score.ideal ) {
@@ -58,7 +59,7 @@ export class PassphraseGenerator extends Component {
 	render = () => {
 		const { numberOfWords, passphrase, strength, hash } = this.state;
 
-		const dependenciesAvailable = true; // stub. need to put in state and avoid generate() when false?
+		const dependenciesAvailable = true; // not necessary if stick w/ jspm, but leave until sure that won't do any local bundling
 
 		return html`
 			<${ Card }>
@@ -77,6 +78,7 @@ export class PassphraseGenerator extends Component {
 						<${ Fragment }>
 							<p>
 								This will show a mix of imported ES and CommonJS modules (with dependencies), for additional testing.
+								<!-- todo rephrase ^ once it's all working -->
 							</p>
 
 							<${ RangeControl }
