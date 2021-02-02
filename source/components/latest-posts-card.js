@@ -65,7 +65,7 @@ export class LatestPostsCard extends Component {
 							<code><a href="https://wordpress.github.io/gutenberg/?path=/story/components-button--primary">Button</a></code> and
 							<code><a href="https://github.com/WordPress/gutenberg/blob/056dd36/packages/api-fetch/README.md">apiFetch</a></code> are used below.
 							All of the cards on this page use <a href="https://wordpress.github.io/gutenberg/?path=/story/components-card--default"><code>Card</code></a> as well.
-							No third-party dependencies are needed beyond what Core currently provides, or could in the future.
+							No third-party dependencies are needed beyond what Core currently provides, or easily could in the future.
 						</p>
 					</div>
 

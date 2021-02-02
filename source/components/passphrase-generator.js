@@ -9,7 +9,6 @@ const { Component, Fragment } = wp.element;
  * External dependencies
  */
 const html = wp.html;
-const { debounce } = window.lodash;
 
 import { v4 as uuidv4 } from 'https://jspm.dev/uuid@8.3';                    // Native ESM
 	// add subpath ?
@@ -19,23 +18,21 @@ import entropy from 'https://jspm.dev/npm:ideal-password@2.3';               // 
 import diceware from 'https://jspm.dev/npm:diceware-generator@3.0';          // CommonJS -> EMS
 import eff2016Long from 'https://jspm.dev/npm:diceware-wordlist-en-eff@1.0'; // CommonJS -> EMS
 
-// maybe if use import maps shim and: import { v4 as uuidv4 } from 'uuid';
-
-// is there a simpler solution? maybe just a build script that copies dependencies into build/, and `import` by path?
-// maybe have webpack bundle _only the dependencies_ ? or use snowpack to do it & convert cjs to esj?
-
-
-
 export class PassphraseGenerator extends Component {
 	constructor( props ) {
 		super( props );
+
+		this.state = {
+			// This isn't used in a meaningful way, it's just here an example of importing a native ES module.
+			userId: uuidv4(),
+		}
 	}
 
 	// Set default state.
 	componentWillMount = () => {
 		// ⚠️ This isn't fine-tuned, its just for demonstration purposes. These could be completely inaccurate in reality.
 		entropy.config( {
-			minAcceptable: 50,
+			minAcceptable: 53,
 			minIdeal: 65
 		} );
 
@@ -64,9 +61,13 @@ export class PassphraseGenerator extends Component {
 		}
 
 		// The real value will take ~450ms to compute, so give the user visual feedback that something is happening.
-		const hash = html`
+		let hash = html`
 			<${ Spinner } />
 		`;
+
+		if ( 'Spinner' === this.state?.hash?.type?.name ) {
+			hash = 'Throttled, please try again.';
+		}
 
 		this.setState(
 			{ numberOfWords, passphrase, strength, hash },
@@ -121,9 +122,8 @@ export class PassphraseGenerator extends Component {
 	}
 
 	render = () => {
-		const { numberOfWords, passphrase, strength, hash } = this.state;
+		const { numberOfWords, passphrase, strength, hash, userId } = this.state;
 		const dependenciesAvailable = true; // todo detect automatically based on the the prescense of window.diceware, etc
-		const userId = uuidv4(); // This isn't used in a meaningful way, it's just here an example of importing a native ES module.
 
 		return html`
 			<${ Card } id="passphrase-generator">
@@ -177,7 +177,7 @@ export class PassphraseGenerator extends Component {
 							className="number-of-words"
 							label="Number of Words"
 							marks=${ true }
-							max=8
+							max=7
 							min=3
 							value=${ numberOfWords }
 							onChange=${ value => this.generate( value ) }
@@ -197,8 +197,9 @@ export class PassphraseGenerator extends Component {
 							</span>
 
 							<span className="passphrase-score">
-								<!-- Technically the score goes to infinity, but this is a reasonable max, and helps users understand. -->
-								${ ' ' } (${ Math.round( strength.score ) } / 128)
+								<!-- Technically the score goes to infinity, but this is a reasonable max in
+								     practice, and helps users put potential passphrases in perspective. -->
+								${ ' ' } (${ Math.round( strength.score ) } / 100 )
 							</span>
 						</p>
 
