@@ -38,7 +38,7 @@ There are two ways to import dependencies, depending on your needs and preferenc
 
 1. **Modern CDN:** This method is the easiest, and avoids any need for tooling.
 
-    [Skypack](https://www.skypack.dev/) is a remote CDN that's [designed for modern web apps](https://docs.skypack.dev/). It transparently up-converts modules to ESM, splits code into cacheable modules, avoids serving unnecessary polyfills to modern browers, etc.
+    [Skypack](https://www.skypack.dev/) is a remote CDN that's [designed for modern web apps](https://docs.skypack.dev/). It transparently up-converts modules to ESM, splits code into cacheable modules, tailors the package to every browser request to avoid unnecessary polyfills, etc.
 
 1. **Locally bundled packages:** You can also bundle packages locally if you prefer, but still much faster and more conveniently than traditional approaches.
 

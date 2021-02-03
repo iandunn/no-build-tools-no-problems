@@ -1,19 +1,24 @@
 {
 	"__dependencies:comment": "Production dependencies are managed by Snowpack. See `snowpack.deps.json`.",
+	"browserslist": [
+		"extends @wordpress/browserslist-config"
+	],
 	"dependencies": {},
 	"devDependencies": {
 		"@babel/cli": "^7.12.10",
 		"@babel/core": "^7.12.10",
 		"@babel/plugin-proposal-class-properties": "^7.12.1",
-		"@babel/preset-react": "^7.12.10",
+		"@babel/preset-env": "^7.12.13",
+		"@babel/preset-react": "^7.12.13",
+		"@snowpack/plugin-babel": "^2.1.6",
+		"@wordpress/browserslist-config": "^3.0.1",
 		"babel-plugin-htm": "^3.0.0",
 		"snowpack": "^3.0.11"
 	},
-
 	"__scripts:comment:bundle": "Removing build/index.js causes the source files to be loaded. See `get_serve_folder()`.",
 	"__scripts:comment:bundle2": "todo: could improve it by deleting everything except _snowpack - something like rm -rfvi !('build/_snowpack'). be careful not to delete anything above build/",
 	"scripts": {
 		"bundle": "npm run build && rm -f build/index.js",
-		"build":  "snowpack build"
+		"build": "snowpack build"
 	}
 }

@@ -92,6 +92,7 @@ add_action( 'admin_print_scripts', function() {
 
 	// build this dynamically? from snowpack.deps.json?
 		// or maybe from `build/vendor/pkg/import-map.json`, but the paths there are wrong, would need to convert to the URLs below
+		// there's a plugin for that -- https://www.npmjs.com/package/snowpack-plugin-import-map
 	// what about when there are shared things tree-shoken out of individual deps?
 	// check when add more packages
 	$dependencies = array(

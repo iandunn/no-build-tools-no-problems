@@ -6,14 +6,18 @@ module.exports = {
 	},
 
 	plugins: [
+		"@snowpack/plugin-babel"
+
 		/*
 		 todo
-		 setup babel
 		 also look at sass, maybe postcss - see #6
+
+		basic hmr
+		also react-refresh - don't just want hmr, want "fash refresh"
 
 		those might be helpful
 			build-script also helpful? run-script?
-			react-refresh
+
 			webpack to do in prod - that could be an interesting way to intergrate w/ wp-scripts
 			hmr-inject
 			import-map
@@ -36,5 +40,19 @@ module.exports = {
 		// watch true ? need b/c not using their web server? maybe the _server_ is what does the `import from 'uuid' to import from 'skypack.dev` translation?
 
 		// minify files and other optimizations - plugins section?
+	},
+
+	optimize: {
+		// Add other files here for any modules that are imported dynamically, and for any files that are only
+		// loaded on some screens. e.g., admin.js for wp-admin, and front-end.js for the front end.
+		entrypoints: [ 'source/index.js' ],
+
+		// HTTP2 is above 50% now, so it's better to not concatenate files?
+		// Maybe still good until modulepreload is available in all Safari & Firefox?
+		bundle: true,
+
+		treeshake: true,
+		minify: true,
+		target: 'es2015',
 	},
 };

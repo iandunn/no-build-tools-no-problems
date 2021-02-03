@@ -19,6 +19,7 @@ export function MainView() {
 	// Could check for that, but this approach is consistent with `get_serve_file()` in `plugin.php`.
 	const loadPath = scriptUrl.indexOf( '/build/' ) > 0 ? 'build' : 'source';
 
+	// add StrictMode
 	return html`
 		<div className="wrap">
 			<h1>No Build Tools, No Problems</h1>
