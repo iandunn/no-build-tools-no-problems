@@ -32,7 +32,7 @@ export function Charts() {
 						Using <a href="https://docs.skypack.dev/skypack-cdn/api-reference/pinned-urls-optimized">a "pinned" URL</a> gets you code that's optimized for production usage.
 
 						${ ' ' }
-						<${ Button } isLink onClick=${ confetti } >
+						<${ Button } isLink onClick=${ () => confetti() } >
 							Huzzah!
 							<!-- todo doesn't work in chrome, throws exception
 							switch to unminified and use chrome debugger
