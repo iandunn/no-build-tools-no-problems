@@ -14,7 +14,7 @@ window.wp = window.wp || {};
  * External dependencies
  */
 //import htm from 'https://unpkg.com/htm@3.0.4/dist/htm.module.js?module'; // ⚠️ Always explicitly declare the version when importing remotely. See https://www.youtube.com/watch?v=mVjZQrsXBQE (timestamp ?)
-import htm from 'https://jspm.dev/npm:htm@3.0';
+import htm from 'https://cdn.skypack.dev/pin/htm@v3.0.4-eKPIliCVcHknqhs5clvp/min/htm.js';
 	// add subpath to es module?
 
 // this would eventually be wp-includes/js/dist/htm.js or whatever. using unpkg.com in this context so don't have to add complexity of `npm install` step

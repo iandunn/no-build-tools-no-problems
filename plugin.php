@@ -13,6 +13,7 @@ require __DIR__ . '/core/core.php';
 // Below this is stuff the plugin would need to do itself.
 
 
+// create admin page
 add_action( 'admin_menu', function() {
 	add_menu_page(
 		'No Build Tools, No Problems',
@@ -28,11 +29,12 @@ add_action( 'admin_menu', function() {
 	);
 } );
 
+// add preloadmodule links
 add_action( 'admin_enqueue_scripts', function() {
-	preload_modules( __DIR__ . '/'. get_serve_folder() );
+	preload_modules( __DIR__ . '/' . get_serve_folder() );
 }, 1 ); // As early as possible inside <head>
 
-// this could maybe go in core.php?
+// determine to serve from source/ or build/
 function get_serve_folder() {
 	// Cache the result so we don't have to hit the filesystem every time this is called.
 	static $folder;
@@ -45,24 +47,23 @@ function get_serve_folder() {
 	return $folder;
 }
 
-// enqueue 3rd-party dependencies temporarily until they can be imported
-add_action( 'admin_enqueue_scripts', function( $hook_suffix ) {
-}, 9 );
 
+// register/enqueue scripts & styles
 add_action( 'admin_enqueue_scripts', function( $hook_suffix ) {
 	if ( 'toplevel_page_no-build-tools-no-problems' !== $hook_suffix ) {
 		return;
 	}
 
 	$folder       = get_serve_folder();
-	$dependencies = array( 'wp-element', 'wp-components', 'wp-api-fetch' );
-		// need to add wp-polyfill as a dependency? maybe for api-fetch & other stuff
+	$dependencies = array( 'wp-element', 'wp-components', 'wp-api-fetch', 'es-module-shims' );
+	// need to add wp-polyfill as a dependency? maybe for api-fetch & other stuff
 
-	$dependencies[] = 'lodash'; // just temporary for passphrase stub
+	//	if ( 'source' === $folder ) {
+	$dependencies[] = 'nbtnp-core';
+	// todo need for htm even in build, until we config snowpack to use babel to transpile htm to raw js
 
-	if ( 'source' === $folder ) {
-		$dependencies[] = 'nbtnp-core';
-	}
+	// if that working, then maybe uninstal npm packages being used. can ditch npm alltogether?
+	//	}
 
 	wp_enqueue_script(
 		'no-build-tools-no-problems',
@@ -71,7 +72,7 @@ add_action( 'admin_enqueue_scripts', function( $hook_suffix ) {
 		filemtime( __DIR__ . "/$folder/index.js" )
 	);
 	wp_script_add_data( 'no-build-tools-no-problems', 'defer', true );
-	wp_script_add_data( 'no-build-tools-no-problems', 'type', 'module' );
+	wp_script_add_data( 'no-build-tools-no-problems', 'type', 'module-shim' ); // convert to 'module' when no longer need shim
 
 	wp_enqueue_style(
 		'no-build-tools-no-problems',
@@ -79,4 +80,35 @@ add_action( 'admin_enqueue_scripts', function( $hook_suffix ) {
 		array( 'wp-components' ),
 		filemtime( __DIR__ . '/source/app.css' )
 	);
+} );
+
+// generate import map
+add_action( 'admin_print_scripts', function() {
+	$package_folder = '/build/vendor/pkg/';
+
+	if ( ! is_dir( __DIR__ . $package_folder ) ) {
+		return;
+	}
+
+	// build this dynamically? from snowpack.deps.json?
+		// or maybe from `build/vendor/pkg/import-map.json`, but the paths there are wrong, would need to convert to the URLs below
+	// what about when there are shared things tree-shoken out of individual deps?
+	// check when add more packages
+	$dependencies = array(
+		'imports' => array(
+			"uuid"      => esc_url_raw( plugins_url( $package_folder . 'uuid.js', __FILE__ ) ),
+			"hash-wasm" => esc_url_raw( plugins_url( $package_folder . 'hash-wasm.js', __FILE__ ) ),
+		),
+	);
+
+	?>
+
+	<script type="importmap-shim">
+		<?php
+			echo wp_json_encode( $dependencies );
+			// any security considerations?
+		?>
+	</script>
+
+	<?php
 } );

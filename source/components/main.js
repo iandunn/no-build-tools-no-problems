@@ -4,6 +4,7 @@
 const html = wp.html;
 const { Fragment } = wp.element;
 
+
 /**
  * Internal dependencies
  */
@@ -13,7 +14,10 @@ import { PassphraseGenerator } from './passphrase-generator.js';
 
 export function MainView() {
 	const scriptUrl = document.getElementById( 'no-build-tools-no-problems-js' ).getAttribute( 'src' );
-	const loadPath  = scriptUrl.indexOf( '/source/' ) ? 'source' : 'build';
+
+	// Not using Snowpack's `.env` file because `__SNOWPACK_ENV__` wouldn't exist when loading from `source/`.
+	// Could check for that, but this approach is consistent with `get_serve_file()` in `plugin.php`.
+	const loadPath = scriptUrl.indexOf( '/build/' ) > 0 ? 'build' : 'source';
 
 	return html`
 		<div className="wrap">
@@ -22,7 +26,7 @@ export function MainView() {
 			${ 'source' === loadPath && html`
 				<${ Fragment }>
 					<p>
-						Currently serving files from <code>source/</code> (and <code>jspm.dev</code>), for the optimal developer experience.
+						Currently serving files from <code>source/</code>, for the optimal developer experience.
 					</p>
 
 					<p>
@@ -33,7 +37,7 @@ export function MainView() {
 
 			${ 'build' === loadPath && html`
 				<p>
-					Currently serving files from <code>build/</code> (and <code>jspm.dev</code>), for optimal performance and browser support.
+					Currently serving files from <code>build/</code>, for optimal performance and browser support.
 				</p>
 
 				<p>
@@ -42,20 +46,9 @@ export function MainView() {
 					Run <code>rm -rf build/</code> to switch back to using <code>source/</code> files.
 				</p>
 			` }
-			<!--
-			todo shouldn't serve jspm.dev when build, should bundle actual packages. that'd require import maps shim
-
-			also update instructions for rm -fr build/* - maybe just delete build/index.js, b/c want to keep build/vendor.js and serve that alongside first-party source files?
-
-			also note that you'll have to run npm install, and npm build whenever you change a dependency
-			-->
 
 			<div className="cards-container">
 				<${LatestPostsCard} />
-
-				<!-- add another card, example of importing _ES_ module that has dependencies.
-				important that it has deps b/c that's complexity that has to be accounted for or not real-world poc
-				-->
 
 				<${Charts} />
 

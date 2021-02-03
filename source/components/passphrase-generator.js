@@ -10,25 +10,35 @@ const { Component, Fragment } = wp.element;
  */
 const html = wp.html;
 
-import { v4 as uuidv4 } from 'https://jspm.dev/uuid@8.3';                    // Native ESM
-	// add subpath ?
-import { argon2id } from 'https://jspm.dev/npm:hash-wasm@4.4';               // Native ESM
-	// add subpath - want https://unpkg.com/browse/hash-wasm@4.4.1/dist/argon2.umd.min.js . update comment b/c this is UMD not ESM
-import entropy from 'https://jspm.dev/npm:ideal-password@2.3';               // CommonJS -> EMS
-import diceware from 'https://jspm.dev/npm:diceware-generator@3.0';          // CommonJS -> EMS
-import eff2016Long from 'https://jspm.dev/npm:diceware-wordlist-en-eff@1.0'; // CommonJS -> EMS
+/*
+ * Uncomment these imports and `npm run bundle` to test importing locally-bundled dependencies.
+ */
+//import { v4 as uuidv4 } from 'uuid';      // Native ESM
+//import { argon2id }     from 'hash-wasm'; // Native ESM
+
+// todo convert these to import maps too, but need to wait until https://github.com/snowpackjs/snowpack/discussions/2548 is released
+// then check if can destructure specific functions from any of these, since snowpack will be is bundling
+// it may expose them when couldn't access before
+import entropy     from 'https://cdn.skypack.dev/pin/ideal-password@v2.3.0-EzuQ0ccAMXBpJsZehqE7/min/ideal-password.js';                     // CommonJS -> EMS
+import diceware    from 'https://cdn.skypack.dev/pin/diceware-generator@v3.0.1-WULYULlcLeNCwJ34FCIG/min/diceware-generator.js';             // CommonJS -> EMS
+import eff2016Long from 'https://cdn.skypack.dev/pin/diceware-wordlist-en-eff@v1.0.1-gEyH81Lqvk6JUjXKPVT4/min/diceware-wordlist-en-eff.js'; // CommonJS -> EMS
+
 
 export class PassphraseGenerator extends Component {
 	constructor( props ) {
 		super( props );
 
 		this.state = {
-			// This isn't used in a meaningful way, it's just here an example of importing a native ES module.
-			userId: uuidv4(),
+			// The UUID isn't used in a meaningful way, it's just here an example of importing a native ES module.
+			//
+			// This check is only needed in a demo app, so we can demonstrate multiple approach all in one app.
+			// A real world project could pick one approach and remove anything unrelated to that.
+			userId: 'function' === typeof uuidv4 ? uuidv4() : 'error',
 		}
 	}
 
 	// Set default state.
+	// todo lifecyle has been renamed, update
 	componentWillMount = () => {
 		// ⚠️ This isn't fine-tuned, its just for demonstration purposes. These could be completely inaccurate in reality.
 		entropy.config( {
@@ -39,7 +49,6 @@ export class PassphraseGenerator extends Component {
 		this.generate( 4 );
 	}
 
-	// todo replace stubs w/ ES & CJS modules
 	generate = ( numberOfWords ) => {
 		const passphrase = diceware( {
 			language  : eff2016Long,
@@ -76,8 +85,13 @@ export class PassphraseGenerator extends Component {
 	}
 
 	async setArgon2idHash( password ) {
+		// This check is only needed in a demo app, see above comments.
+		if ( 'function' !== typeof argon2id ) {
+			return;
+		}
+
 		let startTime;
-		const tune = true; // Flip to true when testing.
+		const tune = false; // Flip to true when testing.
 
 		if ( tune ) {
 			startTime = performance.now();
@@ -100,9 +114,8 @@ export class PassphraseGenerator extends Component {
 			salt,
 			parallelism: 1,
 			memorySize: 512, // In kilobytes.
-			//iterations: 75, // This is much lower than you'd want it in a real-world application.
-			iterations: 20, // todo tmp, very low until debouncing implemented
-			hashLength: 32, // In bytes.
+			iterations: 20,  // ⚠️ This is dangerously low, just for demo purposes. Higher values would require debouncing the UI to avoid slow/unresponsive UI.
+			hashLength: 32,  // In bytes.
 			outputType: 'encoded', // Includes verification parameters.
 		} );
 
@@ -111,19 +124,15 @@ export class PassphraseGenerator extends Component {
 			console.log( 'Elapsed time: ' + ( performance.now() - startTime ) + 'ms.' );
 		}
 
-		// todo when the range slider is changes quickly, these get backed up
-		// is there a way to abort the previous requests and just process the latest one?
-			// or just throttle/debounce?
-
-		// once the queueing problem is solved, does that solve the UI being slow? or still need to work on htat?
-			// try tweaking memorySize, see if that helps
-
 		this.setState( { hash: key } );
 	}
 
 	render = () => {
 		const { numberOfWords, passphrase, strength, hash, userId } = this.state;
-		const dependenciesAvailable = true; // todo detect automatically based on the the prescense of window.diceware, etc
+
+		// This check is only needed in a demo app, see above comments.
+		const dependenciesAvailable = 'function' === typeof uuidv4 && 'function' === typeof argon2id;
+		// todo add others when they're loaded from local bundle
 
 		return html`
 			<${ Card } id="passphrase-generator">
@@ -146,71 +155,86 @@ export class PassphraseGenerator extends Component {
 				<${ CardBody }>
 					<${ Fragment }>
 						<div className="card-description">
-							<${ Notice } status="warning" isDismissible=${ false } className="WIP">
-								This is still a work in progress.
-							<//>
-
 							<p>
-								This demonstrates importing dependencies from a local bundle, including CommonJS packages that are up-converted to ES modules.
+								This card demonstrates importing dependencies from a local bundle instead of a remote CDN, but without any <code>watch</code> tooling.
 							</p>
 
 							<p>
-								That should never be <em>required</em>, but it should be <em>supported</em> as an optional enhancement, since many will want it.
+								Local bundles will require some tooling, of course, but with this you only have to run the <code>bundle</code> task when you add, update, or remove a dependency.
 							</p>
 
-							${ ! dependenciesAvailable && html`
-								<${ Notice } status="error" isDismissible=${ false } >
-									You'll need to <code>npm run build</code> to see this card working.
-								<//>
-							` }
+							<p>
+								It uses <a href="https://www.snowpack.dev/">Snowpack</a>, which is designed for unbundled development.
+								It's 10x faster than webpack because it never rebuilds things that haven't changed.
+								It still does tree-shaking, will automatically up-convert CommonJS modules to ESM, and has a much more ergonomic approach to package locking.
+							</p>
+
+							<p>
+								Tooling like this should never be <em>required</em>, but it should be <em>supported</em> as an optional enhancement, since many will want it.
+							</p>
 						</div>
 
-						<p>
-							<strong>User UUID:</strong>
+						${ ! dependenciesAvailable && html`
+							<${ Notice } status="info" isDismissible=${ false } >
+								<p>To see this card working, please:</p>
 
-							<code className="block">
-								${ userId }
-							</code>
-						</p>
+								<ol>
+									<li><code>npm run bundle</code></li>
+									<li>Uncomment the <code>import</code> statements at the top of this file.</li>
+								</ol>
+							<//>
+						` }
 
-						<${ RangeControl }
-							className="number-of-words"
-							label="Number of Words"
-							marks=${ true }
-							max=7
-							min=3
-							value=${ numberOfWords }
-							onChange=${ value => this.generate( value ) }
-						/>
+						${ dependenciesAvailable && html`
+							<${Fragment}>
+								<p>
+									<strong>User UUID:</strong>
 
-						<p>
-							<strong>Passphrase:</strong>
-							<code className="block">
-								${ passphrase }
-							</code>
-						</p>
+									<code className="block">
+										${ userId }
+									</code>
+								</p>
 
-						<p>
-							<strong>Strength:</strong> ${ ' ' }
-							<span className="passphrase-strength-label ${ strength.label.toLowerCase().replace( ' ', '-' ) }">
-								${ strength.label }
-							</span>
+								<${ RangeControl }
+									className="number-of-words"
+									label="Number of Words"
+									marks=${ true }
+									max=7
+									min=3
+									value=${ numberOfWords }
+									onChange=${ value => this.generate( value ) }
+								/>
 
-							<span className="passphrase-score">
-								<!-- Technically the score goes to infinity, but this is a reasonable max in
-								     practice, and helps users put potential passphrases in perspective. -->
-								${ ' ' } (${ Math.round( strength.score ) } / 100 )
-							</span>
-						</p>
+								<p>
+									<strong>Passphrase:</strong>
+									<code className="block">
+										${ passphrase }
+									</code>
+								</p>
 
-						<p>
-							<strong>Argon2id hash:</strong>
-							<span className="passphrase-hash">
-								<code className="block">
-									${ hash }
-								</code>
-							</span>
-						</p>
+								<p>
+									<strong>Strength:</strong> ${ ' ' }
+									<span className="passphrase-strength-label ${ strength.label.toLowerCase().replace( ' ', '-' ) }">
+										${ strength.label }
+									</span>
+
+									<span className="passphrase-score">
+										<!-- Technically the score goes to infinity, but this is a reasonable max in
+										     practice, and helps users put potential passphrases in perspective. -->
+										${ ' ' } (${ Math.round( strength.score ) } / 100 )
+									</span>
+								</p>
+
+								<p>
+									<strong>Argon2id hash:</strong>
+									<span className="passphrase-hash">
+										<code className="block">
+											${ hash }
+										</code>
+									</span>
+								</p>
+							</${Fragment}>
+						` }
 					</${Fragment}>
 				</${CardBody}>
 			</${Card}>

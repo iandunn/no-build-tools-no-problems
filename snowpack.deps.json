@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "hash-wasm": "^4.4.1",
+    "uuid": "^8.3.2"
+  },
+  "lock": {
+    "hash-wasm#^4.4.1": "hash-wasm@v4.4.1-Oq3nka6OxITs0AxVcmUm",
+    "uuid#^8.3.2": "uuid@v8.3.2-XAQ9X05vJqvKpZccxFGc"
+  }
+}

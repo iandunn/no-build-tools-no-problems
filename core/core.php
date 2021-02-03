@@ -17,6 +17,13 @@ add_action( 'admin_enqueue_scripts', function() {
 	wp_script_add_data( 'nbtnp-core', 'defer', true );
 	wp_script_add_data( 'nbtnp-core', 'type', 'module' );
 
+	wp_register_script(
+		'es-module-shims',
+		plugins_url( 'es-module-shims.js', __FILE__ ), // can't be loaded via skypack
+		array(),
+		'0.9.0'
+	);
+	wp_script_add_data( 'es-module-shims', 'defer', true ); // has to load _after_ the <script type="importmap-shim">
 }, 9 );
 
 /**

@@ -1,11 +1,15 @@
 /**
  * WordPress dependencies
  */
-const { Card, CardHeader, CardBody, Notice } = wp.components;
+const { Button, Card, CardHeader, CardBody } = wp.components;
 const { Fragment } = wp.element;
 const html = wp.html;
 
-import { Doughnut } from 'https://jspm.dev/npm:react-chartjs-2@2.11.1';
+import { Doughnut } from 'https://cdn.skypack.dev/pin/react-chartjs-2@v2.11.1-cGAzf4xxUMTbCCM54GCt/min/react-chartjs-2.js';
+	// subpath?
+import confetti from 'https://cdn.skypack.dev/pin/canvas-confetti@v1.3.3-ySRaL53MTwssL5KYsZu8/min/canvas-confetti.js';
+
+// maybe load dynamically imports, and render a spinner in the meantime?
 
 export function Charts() {
 	const data = getData();
@@ -20,8 +24,20 @@ export function Charts() {
 			<${ CardBody }>
 			    <${ Fragment }>
 					<p className="card-description">
-						This is an example of importing a CommonJS module via <a href="https://jspm.org/">jspm.dev</a>, bypassing the need for any local bundling.
-						It's automatically up-converted to an ES module that you can use with a native <code>import</code>.
+						This card is an example of importing modules via <a href="https://skypack.dev/">cdn.skypack.dev</a>, bypassing the need for any local bundling.
+					</p>
+
+					<p>
+						CommonJS modules are automatically up-converted to a ES modules, so you can use with a native <code>import</code> for everything.
+						Using <a href="https://docs.skypack.dev/skypack-cdn/api-reference/pinned-urls-optimized">a "pinned" URL</a> gets you code that's optimized for production usage.
+
+						${ ' ' }
+						<${ Button } isLink onClick=${ confetti } >
+							Huzzah!
+							<!-- todo doesn't work in chrome, throws exception
+							switch to unminified and use chrome debugger
+							-->
+						<//>
 					</p>
 
 					<${ Doughnut }

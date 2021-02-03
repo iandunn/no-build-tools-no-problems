@@ -23,13 +23,27 @@ You can run the same `source/` scripts in production if you'd like. For smaller 
 
 If that's where you're at, you can `rm .gitignore babel.config.js package.json package-lock.json`, and revel in how tidy your root folder is.
 
-If you're building a large or CPU-intensive project, want to integrate CommonJS modules, or need to support older browsers, then you can add a build step for production files. You'll still be able to develop locally without any `watch` tooling, though.
+If want to optimize performance, or need to support older browsers, then you can add a build step for production files. You'll still be able to develop locally without any `watch` tooling, though.
 
 1. `npm install`
 1. `npm run build`
 1. Deal with all the normal build tool problems  🙁 😞 😖 🥃 😩 😢 🥃 😭 😡 🥃 🤬 🥃 🥃 🥃 🥱 🛌 💤 🔁
-1. Once the transpiled files exist in `build/`, the plugin will automatically switch to enqueue them instead of `source/`. That lets you test them before deploying to production.
+1. Once the transpiled files exist in `build/`, the plugin will automatically switch to enqueue them instead of `source/`. That lets you easily test them before deploying to production.
 1. Once you're done testing, `rm -rf build/*`, and the `source/` files will automatically be enqueued again.
+
+
+### Third-Party Dependencies
+
+There are two ways to import dependencies, depending on your needs and preferences.
+
+1. **Modern CDN:** This method is the easiest, and avoids any need for tooling.
+
+    [Skypack](https://www.skypack.dev/) is a remote CDN that's [designed for modern web apps](https://docs.skypack.dev/). It transparently up-converts modules to ESM, splits code into cacheable modules, avoids serving unnecessary polyfills to modern browers, etc.
+
+1. **Locally bundled packages:** You can also bundle packages locally if you prefer, but still much faster and more conveniently than traditional approaches.
+
+   [Snowpack](https://snowpack.dev) is used to generate bundles 10x faster than Webpack, and only when needed. You don't need to run a `watch` task, just `npm run bundle` when you add/remove a dependency. It still does tree-shaking, will automatically up-convert CommonJS modules to ESM, and has a much more ergonomic approach to package locking.
+
 
 ### Results
 
@@ -40,7 +54,7 @@ The plugin creates a wp-admin screen where it demonstrates what can be achieved 
 
 ### Why
 
-Build tools are the worst part of modern JavaScript. They create a large barrier for new-to-JS devs, and are a recurring pain to set up and use regardless of experience level. They break randomly for opaque reasons, which are difficult to diagnose and fix.
+Build tools are the worst part of modern JavaScript. They create a large barrier for new-to-JS devs, and are a recurring pain to set up and use regardless of experience level. They break randomly for opaque reasons, which are difficult to diagnose and fix. Even when they do work, they're slow.
 
 They've also been totally unnecessary for years, but we're still stuck with ["complexity stockholm syndrome"](https://www.pika.dev/blog/pika-web-a-future-without-webpack).
 
@@ -58,7 +72,9 @@ Right now this is just a proof-of-concept. Fork it and play around with it, see 
 If we can get this approach working well for a range of small/medium-sized plugins, then we can make a proposal for Core to support it, so that everything in `core/` will be provided to plugins automatically.
 
 
-### Additional "buildless" Resources / Inspiration
+### Additional Resources & Inspiration
+
+This paradigm is often referred to as "buildless" or "unbundled development".
 
 * _Don't Build That App!_ by Luke Jackson [ [article](https://formidable.com/blog/2019/no-build-step/) | [presentation](https://www.youtube.com/watch?v=mVjZQrsXBQE) ].
 * [A Future Without Webpack](https://www.pika.dev/blog/pika-web-a-future-without-webpack) by Pika.

@@ -32,4 +32,5 @@ function init() {
 // this is slow in ff w/ dev tools open
 // fast when it's closed though. fast in chrome, but at least partially because of `modulepreload`
 // any way to make it faster in ff?
+	// trying closing and opening devtools, to reset any memory leaks or whatever?
 init();

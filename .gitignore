@@ -1,1 +1,14 @@
+#
+# You may or may not want to track `build/`, depending on your use case.
+#
+# First party code served from `source/` in production, depdencies served via `skypack.dev` : Ignore entire folder
+# First party code served from `source/` in production, depdencies served via `build/`      : Ignore entire folder, except `build/vendor/pkg`
+# First party code served from `build/`  in production, depdencies served via `skypack.dev` : Track entire folder,  except `build/vendor/pkg`
+# First party code served from `build/`  in production, depdencies served via `build/`      : Track entire folder
+#
 build/
+
+# Not using this, so no need to track it. See `components/main.js`.
+# This ignore is redundant if you choose to ignore all of build, but is desirable if you're tracking `build/vendor/`.
+build/vendor/.env
+build/vendor/pkg/import-map.json
