@@ -47,7 +47,7 @@ There are two ways to import dependencies, depending on your needs and preferenc
 
 ### Optional Tooling for Improved Developer Experience
 
-<code>npm run watch</code> will additional features, but is not required.
+<code>npm run watch</code> will add additional features, but it's not required.
 
 * Today: Live reloading.
 * Coming soon: PostCSS, Hot Module Reloading, React Fast Refresh.

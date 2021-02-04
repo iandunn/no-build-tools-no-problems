@@ -7,6 +7,7 @@ module.exports = {
 
 	plugins: [
 		"@snowpack/plugin-babel"
+			// is ^ bad b/c it removes esbuild?
 
 		/*
 		 todo
