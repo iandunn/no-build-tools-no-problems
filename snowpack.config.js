@@ -51,7 +51,9 @@ module.exports = {
 
 		// HTTP2 is above 50% now, but it's still helpful to bundle JS modules, to prevent waterfall bottlenecks.
 		// Once Safari & Firefox support `modulepreload`, this will no longer be necessary.
-		bundle: true,
+		bundle: false,
+			// todo want this to be `true` for performance, but need to setup dependencies to be in a separate entrypoint first
+			// otherwise this breaks the "bundle" task workflow b/c the dep files don't exist b/c they were in index.js which was deleted
 
 		treeshake: true,
 		minify: true,
