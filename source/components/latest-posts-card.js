@@ -58,7 +58,7 @@ export class LatestPostsCard extends Component {
 				<${ CardBody }>
 					<div className="card-description">
 						<p>
-							This card demonstrates the baseline of how ES6, React, JSX-like templating, and Gutenberg components can all be used without any tooling.
+							This card demonstrates the baseline of how ES6, React, JSX-like templating, modern CSS, and Gutenberg components can all be used without any tooling.
 						</p>
 
 						<p>

@@ -1,12 +1,12 @@
 /*
- * todo setup SASS for the password-generator card, but leave the rest of it as vanilla css.
- *
- * that'll show how you can optionally incorporate build tools for devex enhancements when it makes sense / is desired,
- * but still avoid a huge complex toolchain that's very fragile and breaks often
+ * Global variables
  */
+:root {
+	--link-transform-formal: capitalize;
+}
 
 /*
- * Global
+ * Global styles
  */
 #nbtnp-cards-container {
 	display: flex;
@@ -47,7 +47,12 @@
 
 
 /*
- * Latests Posts
+ * Latest Posts
+ */
+.post-list a {
+	text-transform: var( --link-transform-formal );
+}
+
  */
 
 

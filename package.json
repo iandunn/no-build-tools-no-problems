@@ -11,8 +11,12 @@
 		"@babel/preset-env": "^7.12.13",
 		"@babel/preset-react": "^7.12.13",
 		"@snowpack/plugin-babel": "^2.1.6",
+		"@snowpack/plugin-postcss": "^1.1.0",
 		"@wordpress/browserslist-config": "^3.0.1",
 		"babel-plugin-htm": "^3.0.0",
+		"postcss": "^8.2.4",
+		"postcss-cli": "^8.3.1",
+		"postcss-preset-env": "^6.7.0",
 		"snowpack": "^3.0.11"
 	},
 	"__scripts:comment:bundle": "Removing build/index.js causes the source files to be loaded. See `get_serve_folder()`.",

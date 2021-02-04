@@ -112,7 +112,7 @@ add_action( 'admin_enqueue_scripts', function( $hook_suffix ) {
 
 	wp_enqueue_style(
 		'no-build-tools-no-problems',
-		plugins_url( 'source/app.css', __FILE__ ),
+		plugins_url( "$folder/app.css", __FILE__ ),
 		array( 'wp-components' ),
 		filemtime( __DIR__ . '/source/app.css' )
 	);

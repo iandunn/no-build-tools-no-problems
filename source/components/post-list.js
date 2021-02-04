@@ -18,7 +18,7 @@ export function PostList( { posts, loading } ) {
 	}
 
 	return html`
-		<ul>
+		<ul className="post-list">
 			${ posts.map( post => html`
 				<li key="${ post.id }">
 					<a href="${ post.link }">

@@ -6,15 +6,22 @@ module.exports = {
 	},
 
 	plugins: [
-		"@snowpack/plugin-babel"
+		"@snowpack/plugin-babel",
 			// is ^ bad b/c it removes esbuild?
+		"@snowpack/plugin-postcss"
 
 		/*
 		 todo
 		 also look at sass, maybe postcss - see #6
 
+		 it'd be better to get hmr working w/ dev server than build, so that doesn't have to deal w/ all the other build stuff (waiting for minification etc, maybe source maps, etc)
+		 or maybe you want to be able to use it with both?
+
 		basic hmr
 		also react-refresh - don't just want hmr, want "fash refresh"
+
+		why are css refreshes slower than js refreshes?
+			maybe the watch task is configured to pool them less often?
 
 		those might be helpful
 			build-script also helpful? run-script?
@@ -55,8 +62,10 @@ module.exports = {
 			// todo want this to be `true` for performance, but need to setup dependencies to be in a separate entrypoint first
 			// otherwise this breaks the "bundle" task workflow b/c the dep files don't exist b/c they were in index.js which was deleted
 
-		treeshake: true,
+		// This minifies JS _and_ CSS. No need for cssnano.
 		minify: true,
+
+		treeshake: true,
 		target: 'es2015',
 	},
 };
