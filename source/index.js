@@ -12,7 +12,7 @@ import { MainView } from './components/main.js';
  * Initialize the app.
  */
 function init() {
-	const container = document.getElementById( 'nbtnp-container' );
+	const container = document.getElementById( 'nbtnp-cards-container' );
 
 	const props = {};
 

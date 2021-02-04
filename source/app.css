@@ -8,37 +8,37 @@
 /*
  * Global
  */
-#nbtnp-container .cards-container {
+#nbtnp-cards-container {
 	display: flex;
 	flex-wrap: wrap;
 	margin-top: 2em;
 }
 
-#nbtnp-container .components-card {
+#nbtnp-cards-container .components-card {
 	flex-grow: 1;
 	min-width: 300px;
 	max-width: 450px;
 	margin: 2em 20px 0 0;
 }
 
-#nbtnp-container .components-card ul {
+#nbtnp-cards-container .components-card ul {
 	list-style: disc;
 	margin-left: 1em;
 }
 
-#nbtnp-container .components-spinner {
+#nbtnp-cards-container .components-spinner {
 	margin-bottom: 1em;
 }
 
-#nbtnp-container .components-notice.WIP {
+#nbtnp-cards-container .components-notice.WIP {
 	margin-bottom: 2em;
 }
 
-#nbtnp-container .card-description {
+#nbtnp-cards-container .card-description {
 	margin-bottom: 2em;
 }
 
-#nbtnp-container code.block {
+#nbtnp-cards-container code.block {
 	display: block;
 	overflow-wrap: anywhere;
 	margin: 10px;
@@ -59,52 +59,52 @@
 /*
  * Passphrase Generator
  */
-#nbtnp-container #passphrase-generator .components-card__header {
+#nbtnp-cards-container #passphrase-generator .components-card__header {
 	justify-content: left
 }
 
-#nbtnp-container #passphrase-generator .security-purpose-warning {
+#nbtnp-cards-container #passphrase-generator .security-purpose-warning {
 	margin-left: 20px;
 }
 
-#nbtnp-container #passphrase-generator .security-purpose-warning .dashicons-warning::before {
+#nbtnp-cards-container #passphrase-generator .security-purpose-warning .dashicons-warning::before {
 	color: #f0b849;
 }
 
-#nbtnp-container #passphrase-generator .security-purpose-warning .components-popover__content {
+#nbtnp-cards-container #passphrase-generator .security-purpose-warning .components-popover__content {
 	max-width: max-content !important;
 		/* otherwise the value Gutenberg automatically sets on the element toggles between 0 and 864px every 100ms. their bug or mine? */
 		/* it's also not wrapping */
 }
 
-#nbtnp-container .number-of-words label {
+#nbtnp-cards-container .number-of-words label {
 	font-weight: 600;
 }
 
-#nbtnp-container .passphrase-strength-label.very-weak {
+#nbtnp-cards-container .passphrase-strength-label.very-weak {
 	color: #dc3232;
 }
 
-#nbtnp-container .passphrase-strength-label.acceptable {
+#nbtnp-cards-container .passphrase-strength-label.acceptable {
 	color: #ffb900;
 }
 
-#nbtnp-container .passphrase-strength-label.ideal {
+#nbtnp-cards-container .passphrase-strength-label.ideal {
 	color: #46b450;
 }
 
-#nbtnp-container #passphrase-generator .components-notice {
+#nbtnp-cards-container #passphrase-generator .components-notice {
 	margin-top: 0;
 	margin-bottom: 0;
 	padding-top: 0;
 	padding-bottom: 0;
 }
 
-#nbtnp-container #passphrase-generator .components-notice.is-info {
+#nbtnp-cards-container #passphrase-generator .components-notice.is-info {
 	background-color: #007cba14; /* var(--wp-admin-theme-color) with ~10% opacity */
 
 }
 
-#nbtnp-container #passphrase-generator .components-notice__content {
+#nbtnp-cards-container #passphrase-generator .components-notice__content {
 	margin-top: 0;
 }

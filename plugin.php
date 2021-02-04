@@ -20,14 +20,50 @@ add_action( 'admin_menu', function() {
 		'No Build Tools, No Problems',
 		'read',
 		'no-build-tools-no-problems',
-		function() {
-			// this works, but it'd be nice to be able to pass in an arbitrary id from things like add_menu_page()
-			// `wp_add_dashboard_widget()` provides a `$callback_args` param, which gets passed to the callback.
-			// could add something like that to all Core functions that ask for a callback
-			__return_placeholder_div( 'nbtnp-container' );
-		}
+		__NAMESPACE__ . '\render_shell'
 	);
 } );
+
+// render the basic markup and styles that don't need to be in react
+// this gives the user _something_ while they wait for the rest to download/render
+// even if it's just a header, it makes it _feel_ like the content is faster
+// having something visual at the top anchors it too, so the whole page doesn't "jump" as everything is loaded all at once
+//
+// better name? not truly an app shell in the PWA sense
+function render_shell() {
+	?>
+		<div class="wrap">
+			<h1>No Build Tools, No Problems</h1>
+
+			<?php if ( 'source' === get_serve_folder() ) : ?>
+
+				<p>
+					Currently serving files from <code>source/</code>, for the optimal developer experience.
+				</p>
+
+				<p>
+					You can also <code>npm run build</code> to build optimized files for production, but it's not required.
+				</p>
+
+			<?php else : ?>
+
+				<p>
+					Currently serving files from <code>build/</code>, for optimal performance and browser support.
+				</p>
+
+				<p>
+					It's only necessary to test these before you deploy to production, or tag a release.
+
+					Run <code>rm -rf build/</code> to switch back to using <code>source/</code> files.
+				</p>
+
+			<?php endif; ?>
+
+			<?php __return_placeholder_div( 'nbtnp-cards-container' ); ?>
+		</div>
+	<?php
+}
+
 
 // add preloadmodule links
 add_action( 'admin_enqueue_scripts', function() {
