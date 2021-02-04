@@ -160,13 +160,9 @@ export class PassphraseGenerator extends Component {
 							</p>
 
 							<p>
-								Local bundles will require some tooling, of course, but with this you only have to run the <code>bundle</code> task when you add, update, or remove a dependency.
-							</p>
-
-							<p>
-								It uses <a href="https://www.snowpack.dev/">Snowpack</a>, which is designed for unbundled development.
-								It's 10x faster than webpack because it never rebuilds things that haven't changed.
-								It still does tree-shaking, will automatically up-convert CommonJS modules to ESM, and has a much more ergonomic approach to package locking.
+								Local bundles necessitate <em>some</em> tooling for package management, but <a href="https://www.snowpack.dev/">Snowpack</a> ${ ' ' }
+								is designed for unbundled development, so you only have to run the <code>bundle</code> task when you add, update, or remove a dependency.
+								It'll do tree-shaking, up-convert ES modules, and has a much more ergonomic lock file.
 							</p>
 
 							<p>
