@@ -37,15 +37,17 @@ export function MainView() {
 			` }
 
 			${ 'build' === loadPath && html`
-				<p>
-					Currently serving files from <code>build/</code>, for optimal performance and browser support.
-				</p>
+				<${ Fragment }>
+					<p>
+						Currently serving files from <code>build/</code>, for optimal performance and browser support.
+					</p>
 
-				<p>
-					It's only necessary to test these before you deploy to production, or tag a release.
+					<p>
+						It's only necessary to test these before you deploy to production, or tag a release.
 
-					Run <code>rm -rf build/</code> to switch back to using <code>source/</code> files.
-				</p>
+						Run <code>rm -rf build/</code> to switch back to using <code>source/</code> files.
+					</p>
+				<//>
 			` }
 
 			<div className="cards-container">

@@ -38,8 +38,6 @@ module.exports = {
 		metaUrlPath : 'vendor',
 
 		// watch true ? need b/c not using their web server? maybe the _server_ is what does the `import from 'uuid' to import from 'skypack.dev` translation?
-
-		// minify files and other optimizations - plugins section?
 	},
 
 	optimize: {
@@ -47,8 +45,8 @@ module.exports = {
 		// loaded on some screens. e.g., admin.js for wp-admin, and front-end.js for the front end.
 		entrypoints: [ 'source/index.js' ],
 
-		// HTTP2 is above 50% now, so it's better to not concatenate files?
-		// Maybe still good until modulepreload is available in all Safari & Firefox?
+		// HTTP2 is above 50% now, but it's still helpful to bundle JS modules, to prevent waterfall bottlenecks.
+		// Once Safari & Firefox support `modulepreload`, this will no longer be necessary.
 		bundle: true,
 
 		treeshake: true,

@@ -34,9 +34,6 @@ export function Charts() {
 						${ ' ' }
 						<${ Button } isLink onClick=${ () => confetti() } >
 							Huzzah!
-							<!-- todo doesn't work in chrome, throws exception
-							switch to unminified and use chrome debugger
-							-->
 						<//>
 					</p>
 
