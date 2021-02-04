@@ -45,6 +45,14 @@ There are two ways to import dependencies, depending on your needs and preferenc
    [Snowpack](https://snowpack.dev) is used to generate bundles 10x faster than Webpack, and only when needed. You don't need to run a `watch` task, just `npm run bundle` when you add/remove a dependency. It still does tree-shaking, will automatically up-convert CommonJS modules to ESM, and has a much more ergonomic approach to package locking.
 
 
+### Optional Tooling for Improved Developer Experience
+
+<code>npm run watch</code> will additional features, but is not required.
+
+* Today: Live reloading.
+* Coming soon: PostCSS, Hot Module Reloading, React Fast Refresh.
+
+
 ### Results
 
 The plugin creates a wp-admin screen where it demonstrates what can be achieved without any tooling, and some optional enhancements if you do want some tooling.

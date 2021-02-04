@@ -19,6 +19,7 @@
 	"__scripts:comment:bundle2": "todo: could improve it by deleting everything except _snowpack - something like rm -rfvi !('build/_snowpack'). be careful not to delete anything above build/",
 	"scripts": {
 		"bundle": "npm run build && rm -f build/index.js",
+		"watch": "snowpack build --watch --hmr",
 		"build": "snowpack build"
 	}
 }

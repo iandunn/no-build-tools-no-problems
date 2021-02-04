@@ -21,6 +21,9 @@ module.exports = {
 			webpack to do in prod - that could be an interesting way to intergrate w/ wp-scripts
 			hmr-inject
 			import-map
+
+			maybe do stuff like run eslint during the watch script, can integrate output into console
+				https://www.snowpack.dev/guides/connecting-tools
 		*/
 	],
 

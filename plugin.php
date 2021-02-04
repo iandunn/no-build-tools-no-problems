@@ -113,3 +113,28 @@ add_action( 'admin_print_scripts', function() {
 
 	<?php
 } );
+
+// setup auto reloading
+// actual hmr isn't working yet -- https://github.com/snowpackjs/snowpack/discussions/2565
+// should be in core.php?
+add_action( 'admin_print_scripts', function() {
+	$hmr_folder = '/build/vendor/';
+
+	if ( ! file_exists( __DIR__ . $hmr_folder . '/hmr-client.js' ) ) {
+		// return early if not running watch task, how to detect?
+		// presence of hmr-client in vendor folder
+		return;
+	}
+
+	?>
+
+	<script>
+		// is it safe to hardcode that port? maybe set it in config file and pull from .env file?
+		window.HMR_WEBSOCKET_URL = 'ws://localhost:12321';
+	</script>
+
+    <script type="module" src="<?php echo plugins_url( $hmr_folder . '/hmr-client.js', __FILE__ ); ?>"></script>
+	<script type="module" src="<?php echo plugins_url( $hmr_folder . '/hmr-error-overlay.js', __FILE__ ); ?>"></script>
+
+	<?php
+} );
