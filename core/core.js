@@ -29,4 +29,7 @@ import htm from 'https://cdn.skypack.dev/pin/htm@v3.0.4-eKPIliCVcHknqhs5clvp/min
 
 // Large projects wouldn't want to use this in production, but small/medium could just fine.
 	// maybe they would actually -- https://www.youtube.com/watch?v=mVjZQrsXBQE
+//
+// can automatically wrap in fragments to avoid React unnecessarily complaining, or convert to short fragment?
+// xref https://github.com/developit/htm/issues/175
 wp.html = htm.bind( createElement );

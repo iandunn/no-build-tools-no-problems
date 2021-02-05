@@ -1,0 +1,33 @@
+#nbtnp-cards-container #passphrase-generator .components-card__header {
+	justify-content: left
+}
+
+#nbtnp-cards-container #passphrase-generator .security-purpose-warning {
+	margin-left: 10px;
+}
+
+#nbtnp-cards-container #passphrase-generator .security-purpose-warning .dashicons-warning::before {
+	color: #f0b849;
+}
+
+#nbtnp-cards-container #passphrase-generator .security-purpose-warning .components-popover__content {
+	max-width: max-content !important;
+		/* otherwise the value Gutenberg automatically sets on the element toggles between 0 and 864px every 100ms. their bug or mine? */
+		/* it's also not wrapping */
+}
+
+#nbtnp-cards-container .number-of-words label {
+	font-weight: 600;
+}
+
+#nbtnp-cards-container .passphrase-strength-label.very-weak {
+	color: #dc3232;
+}
+
+#nbtnp-cards-container .passphrase-strength-label.acceptable {
+	color: #ffb900;
+}
+
+#nbtnp-cards-container .passphrase-strength-label.ideal {
+	color: #46b450;
+}

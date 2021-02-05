@@ -1,0 +1,63 @@
+/*
+ * Variables
+ */
+:root {
+	--link-transform-formal: capitalize;
+}
+
+
+/*
+ * Styles
+ */
+#nbtnp-cards-container {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 2em;
+}
+
+#nbtnp-cards-container .components-card {
+	flex-grow: 1;
+	min-width: 300px;
+	max-width: 450px;
+	margin: 2em 20px 0 0;
+}
+
+#nbtnp-cards-container .components-card ul {
+	list-style: disc;
+	margin-left: 1em;
+}
+
+#nbtnp-cards-container .components-spinner {
+	margin-bottom: 1em;
+}
+
+#nbtnp-cards-container .card-description {
+	margin-bottom: 2em;
+}
+
+#nbtnp-cards-container code.block {
+	display: block;
+	overflow-wrap: anywhere;
+	margin: 10px;
+	padding: 5px;
+}
+
+#nbtnp-cards-container .components-card__body {
+	padding-bottom: 30px;
+}
+
+/* Removes the excessive negative space */
+#nbtnp-cards-container .components-notice {
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+#nbtnp-cards-container .components-notice__content {
+	margin-top: 0;
+}
+
+#nbtnp-cards-container .components-notice.is-info {
+	background-color: #007cba14; /* var(--wp-admin-theme-color) with ~10% opacity */
+}

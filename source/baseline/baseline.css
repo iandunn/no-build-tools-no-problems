@@ -1,0 +1,3 @@
+#nbtnp-cards-container .post-list a {
+	text-transform: var( --link-transform-formal );
+}

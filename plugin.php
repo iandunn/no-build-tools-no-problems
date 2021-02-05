@@ -116,9 +116,9 @@ add_action( 'admin_enqueue_scripts', function( $hook_suffix ) {
 
 	wp_enqueue_style(
 		'no-build-tools-no-problems',
-		plugins_url( "$folder/app.css", __FILE__ ),
+		plugins_url( "$folder/global.css", __FILE__ ),
 		array( 'wp-components' ),
-		filemtime( __DIR__ . '/source/app.css' )
+		filemtime( __DIR__ . '/source/global.css' )
 	);
 	// add `defer` attr to ^ ? will this cause FOUC? maybe shouldn't b/c it's "critical" content? is it though?
 		// once create global file, maybe leave that as blocking, but defer the others? they'll be implicitly defer'd if use @import in css (no?) or <link> in js (yes?)
