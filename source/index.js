@@ -6,7 +6,7 @@ const { render, createElement } = wp.element;
 /**
  * Internal dependencies
  */
-import { MainView } from './components/main.js';
+import { MainView } from './main.js';
 
 /**
  * Initialize the app.

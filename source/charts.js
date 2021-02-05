@@ -18,7 +18,7 @@ export function Charts() {
 	return html`
 		<${ Card }>
 			<${ CardHeader }>
-				Charts
+				Dependencies via Modern CDN
 			<//>
 
 			<${ CardBody }>

@@ -137,7 +137,7 @@ export class PassphraseGenerator extends Component {
 		return html`
 			<${ Card } id="passphrase-generator">
 				<${ CardHeader }>
-					Passphrase Generator
+					Dependencies via Local Bundling
 
 					<${Tooltip}
 					    text="

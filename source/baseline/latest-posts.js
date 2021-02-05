@@ -50,9 +50,9 @@ export class LatestPostsCard extends Component {
 		const { loaded, loading, posts } = this.state;
 
 		return html`
-			<${ Card }>
+			<${ Card } id="latest-posts">
 				<${ CardHeader }>
-					Latest Posts
+					Modern Browsers Without Tooling
 				<//>
 
 				<${ CardBody }>
