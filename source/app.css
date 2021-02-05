@@ -30,10 +30,6 @@
 	margin-bottom: 1em;
 }
 
-#nbtnp-cards-container .components-notice.WIP {
-	margin-bottom: 2em;
-}
-
 #nbtnp-cards-container .card-description {
 	margin-bottom: 2em;
 }
@@ -45,15 +41,33 @@
 	padding: 5px;
 }
 
+#nbtnp-cards-container .components-card__body {
+	padding-bottom: 30px;
+}
+
+/* Removes the excessive negative space */
+#nbtnp-cards-container .components-notice {
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+#nbtnp-cards-container .components-notice__content {
+	margin-top: 0;
+}
+
+#nbtnp-cards-container .components-notice.is-info {
+	background-color: #007cba14; /* var(--wp-admin-theme-color) with ~10% opacity */
+}
+
 
 /*
  * Latest Posts
  */
-.post-list a {
+#nbtnp-cards-container .post-list a {
 	text-transform: var( --link-transform-formal );
 }
-
- */
 
 
 /*
@@ -69,7 +83,7 @@
 }
 
 #nbtnp-cards-container #passphrase-generator .security-purpose-warning {
-	margin-left: 20px;
+	margin-left: 10px;
 }
 
 #nbtnp-cards-container #passphrase-generator .security-purpose-warning .dashicons-warning::before {
@@ -96,20 +110,4 @@
 
 #nbtnp-cards-container .passphrase-strength-label.ideal {
 	color: #46b450;
-}
-
-#nbtnp-cards-container #passphrase-generator .components-notice {
-	margin-top: 0;
-	margin-bottom: 0;
-	padding-top: 0;
-	padding-bottom: 0;
-}
-
-#nbtnp-cards-container #passphrase-generator .components-notice.is-info {
-	background-color: #007cba14; /* var(--wp-admin-theme-color) with ~10% opacity */
-
-}
-
-#nbtnp-cards-container #passphrase-generator .components-notice__content {
-	margin-top: 0;
 }

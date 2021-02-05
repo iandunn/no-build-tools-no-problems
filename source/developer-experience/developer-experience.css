@@ -1,0 +1,20 @@
+/*
+ * This is vanilla CSS that will always apply.
+ */
+#nbtnp-cards-container #developer-experience img {
+	display: block;
+	margin-top: 2em;
+	filter: blur( 5px );
+}
+
+/*
+ * Nesting isn't supported by modern browsers, it requires tooling.
+ * If `watch` is running this will override the above styles. This won't apply when running from `source/`.
+ */
+#nbtnp-cards-container {
+	#developer-experience {
+		img {
+			filter: none;
+		}
+	}
+}

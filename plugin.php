@@ -38,7 +38,7 @@ function render_shell() {
 			<?php if ( 'source' === get_serve_folder() ) : ?>
 
 				<p>
-					Currently serving files from <code>source/</code>, for the optimal developer experience.
+					Currently serving files from <code>source/</code>, for the easiest developer experience.
 				</p>
 
 				<p>
@@ -48,7 +48,7 @@ function render_shell() {
 			<?php else : ?>
 
 				<p>
-					Currently serving files from <code>build/</code>, for optimal performance and browser support.
+					Currently serving files from <code>build/</code>, for optimal performance, older browser support, and developer experience enhancements.
 				</p>
 
 				<p>
@@ -105,7 +105,11 @@ add_action( 'admin_enqueue_scripts', function( $hook_suffix ) {
 		'no-build-tools-no-problems',
 		plugins_url( "$folder/index.js", __FILE__ ),
 		$dependencies,
-		filemtime( __DIR__ . "/$folder/index.js" )
+		filemtime( __DIR__ . "/$folder/index.js" ),
+
+		// footer is still necessary with `defer` because the dependencies don't have `defer`, and `wp-components` is massive.
+		// maybe not even worth using `defer` b/c of that?
+		true
 	);
 	wp_script_add_data( 'no-build-tools-no-problems', 'defer', true );
 	wp_script_add_data( 'no-build-tools-no-problems', 'type', 'module-shim' ); // convert to 'module' when no longer need shim
@@ -116,6 +120,8 @@ add_action( 'admin_enqueue_scripts', function( $hook_suffix ) {
 		array( 'wp-components' ),
 		filemtime( __DIR__ . '/source/app.css' )
 	);
+	// add `defer` attr to ^ ? will this cause FOUC? maybe shouldn't b/c it's "critical" content? is it though?
+		// once create global file, maybe leave that as blocking, but defer the others? they'll be implicitly defer'd if use @import in css (no?) or <link> in js (yes?)
 } );
 
 // generate import map

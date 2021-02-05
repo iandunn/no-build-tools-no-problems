@@ -22,6 +22,7 @@ module.exports = {
 
 		why are css refreshes slower than js refreshes?
 			maybe the watch task is configured to pool them less often?
+			oddly, image renames are fast. try modifying css outside of phpstorm in case something in phpstorm is slowing it down
 
 		those might be helpful
 			build-script also helpful? run-script?
