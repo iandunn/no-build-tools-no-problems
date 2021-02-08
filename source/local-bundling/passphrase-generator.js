@@ -146,105 +146,105 @@ export class PassphraseGenerator extends Component {
 			<${Fragment}>
 				<link rel="stylesheet" href="${ componentUrl }/local-bundling.css" />
 
-			<${ Card } id="passphrase-generator">
-				<${ CardHeader }>
-					Dependencies via Local Bundling
+				<${ Card } id="passphrase-generator">
+					<${ CardHeader }>
+						Dependencies via Local Bundling
 
-					<${Tooltip}
-					    text="
-					        ⚠️ Don't use this as your actual password generator.
-					        This is just for demonstration purposes, and may not provide a secure passphrase, accurate entropy scores, etc.
-					    "
-					    position="top left"
-					>
-						<div className="security-purpose-warning">
-							<${Icon} icon="warning" size="36" />
-						</div>
+						<${Tooltip}
+						    text="
+						        ⚠️ Don't use this as your actual password generator.
+						        This is just for demonstration purposes, and may not provide a secure passphrase, accurate entropy scores, etc.
+						    "
+						    position="top left"
+						>
+							<div className="security-purpose-warning">
+								<${Icon} icon="warning" size="36" />
+							</div>
+						<//>
 					<//>
-				<//>
 
-				<${ CardBody }>
-					<${ Fragment }>
-						<div className="card-description">
-							<p>
-								This card demonstrates importing dependencies from a local bundle instead of a remote CDN, but without any <code>watch</code> tooling.
-							</p>
-
-							<p>
-								Local bundles necessitate <em>some</em> tooling for package management, but <a href="https://www.snowpack.dev/">Snowpack</a> ${ ' ' }
-								is designed for unbundled development, so you only have to run the <code>bundle</code> task when you add, update, or remove a dependency.
-								It'll do tree-shaking, up-convert ES modules, and has a much more ergonomic lock file.
-							</p>
-
-							<p>
-								Tooling like this should never be <em>required</em>, but it should be <em>supported</em> as an optional enhancement, since many will want it.
-							</p>
-						</div>
-
-						${ ! dependenciesAvailable && html`
-							<${ Notice } status="info" isDismissible=${ false } >
-								<p>To see this card working, please:</p>
-
-								<ol>
-									<li><code>npm run bundle</code></li>
-									<li>Uncomment the <code>import</code> statements at the top of this file.</li>
-								</ol>
-							<//>
-						` }
-
-						${ dependenciesAvailable && html`
-							<${Fragment}>
+					<${ CardBody }>
+						<${ Fragment }>
+							<div className="card-description">
 								<p>
-									<strong>User UUID:</strong>
-
-									<code className="block">
-										${ userId }
-									</code>
-								</p>
-
-								<${ RangeControl }
-									className="number-of-words"
-									label="Number of Words"
-									marks=${ true }
-									max=7
-									min=3
-									value=${ numberOfWords }
-									onChange=${ value => this.generate( value ) }
-								/>
-
-								<p>
-									<strong>Passphrase:</strong>
-									<code className="block">
-										${ passphrase }
-									</code>
+									This card demonstrates importing dependencies from a local bundle instead of a remote CDN, but without any <code>watch</code> tooling.
 								</p>
 
 								<p>
-									<strong>Strength:</strong> ${ ' ' }
-									<span className="passphrase-strength-label ${ strength.label.toLowerCase().replace( ' ', '-' ) }">
-										${ strength.label }
-									</span>
-
-									<span className="passphrase-score">
-										<!-- Technically the score goes to infinity, but this is a reasonable max in
-										     practice, and helps users put potential passphrases in perspective. -->
-										${ ' ' } (${ Math.round( strength.score ) } / 100 )
-									</span>
+									Local bundles necessitate <em>some</em> tooling for package management, but <a href="https://www.snowpack.dev/">Snowpack</a> ${ ' ' }
+									is designed for unbundled development, so you only have to run the <code>bundle</code> task when you add, update, or remove a dependency.
+									It'll do tree-shaking, up-convert ES modules, and has a much more ergonomic lock file.
 								</p>
 
 								<p>
-									<strong>Argon2id hash:</strong>
-									<span className="passphrase-hash">
+									Tooling like this should never be <em>required</em>, but it should be <em>supported</em> as an optional enhancement, since many will want it.
+								</p>
+							</div>
+
+							${ ! dependenciesAvailable && html`
+								<${ Notice } status="info" isDismissible=${ false } >
+									<p>To see this card working, please:</p>
+
+									<ol>
+										<li><code>npm run bundle</code></li>
+										<li>Uncomment the <code>import</code> statements at the top of this file.</li>
+									</ol>
+								<//>
+							` }
+
+							${ dependenciesAvailable && html`
+								<${Fragment}>
+									<p>
+										<strong>User UUID:</strong>
+
 										<code className="block">
-											${ hash }
+											${ userId }
 										</code>
-									</span>
-								</p>
-							</${Fragment}>
-						` }
-					</${Fragment}>
-				</${CardBody}>
-			</${Card}>
+									</p>
+
+									<${ RangeControl }
+										className="number-of-words"
+										label="Number of Words"
+										marks=${ true }
+										max=7
+										min=3
+										value=${ numberOfWords }
+										onChange=${ value => this.generate( value ) }
+									/>
+
+									<p>
+										<strong>Passphrase:</strong>
+										<code className="block">
+											${ passphrase }
+										</code>
+									</p>
+
+									<p>
+										<strong>Strength:</strong> ${ ' ' }
+										<span className="passphrase-strength-label ${ strength.label.toLowerCase().replace( ' ', '-' ) }">
+											${ strength.label }
+										</span>
+
+										<span className="passphrase-score">
+											<!-- Technically the score goes to infinity, but this is a reasonable max in
+											     practice, and helps users put potential passphrases in perspective. -->
+											${ ' ' } (${ Math.round( strength.score ) } / 100 )
+										</span>
+									</p>
+
+									<p>
+										<strong>Argon2id hash:</strong>
+										<span className="passphrase-hash">
+											<code className="block">
+												${ hash }
+											</code>
+										</span>
+									</p>
+								</${Fragment}>
+							` }
+						</${Fragment}>
+					</${CardBody}>
+				</${Card}>
 			</${Fragment}>
 		`;
 	}
