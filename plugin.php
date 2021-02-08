@@ -159,7 +159,7 @@ add_action( 'admin_print_scripts', function() {
 // setup auto reloading
 // actual hmr isn't working yet -- https://github.com/snowpackjs/snowpack/discussions/2565
 // should be in core.php?
-add_action( 'admin_print_scripts', function() {
+add_action( 'admin_print_scripts-toplevel_page_no-build-tools-no-problems', function() {
 	$hmr_folder = '/build/vendor/';
 
 	if ( ! file_exists( __DIR__ . $hmr_folder . '/hmr-client.js' ) ) {
