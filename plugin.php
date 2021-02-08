@@ -95,19 +95,14 @@ add_action( 'admin_enqueue_scripts', function( $hook_suffix ) {
 	// need to add wp-polyfill as a dependency? maybe for api-fetch & other stuff
 		// it's added automatically?
 
-	// no need to load this when everything is bundled together and transpiled
-	// not working yet, see https://github.com/iandunn/no-build-tools-no-problems/issues/8
-	//if ( 'source' === $folder ) {
-		$dependencies[] =  'es-module-shims';
-	//}
+	if ( 'source' === $folder ) {
+		// Don't need HTM in production, because Babel transpiles it away.
+		$dependencies[] = 'nbtnp-core';
+	}
 
-	//	if ( 'source' === $folder ) {
-	$dependencies[] = 'nbtnp-core';
-	// todo need for htm even in build, until we config snowpack to use babel to transpile htm to raw js
-		// that should be done already, right?
-
-	// if that working, then maybe uninstal npm packages being used. can ditch npm alltogether?
-	//	}
+	// this should only be needed when 'source' === $folder, because the build files target ES5, so they can't use modules
+	// that's not working yet, though. see https://github.com/iandunn/no-build-tools-no-problems/issues/8
+	$dependencies[] =  'es-module-shims';
 
 	wp_enqueue_script(
 		'no-build-tools-no-problems',
