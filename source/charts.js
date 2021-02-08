@@ -28,7 +28,7 @@ export function Charts() {
 					</p>
 
 					<p>
-						CommonJS modules are automatically up-converted to a ES modules, so you can use with a native <code>import</code> for everything.
+						CommonJS modules are automatically up-converted to ES modules, so you can use with a native <code>import</code> for everything.
 						Using <a href="https://docs.skypack.dev/skypack-cdn/api-reference/pinned-urls-optimized">a "pinned" URL</a> gets you code that's optimized for production usage.
 
 						${ ' ' }

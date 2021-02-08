@@ -24,6 +24,12 @@ import diceware    from 'https://cdn.skypack.dev/pin/diceware-generator@v3.0.1-W
 import eff2016Long from 'https://cdn.skypack.dev/pin/diceware-wordlist-en-eff@v1.0.1-gEyH81Lqvk6JUjXKPVT4/min/diceware-wordlist-en-eff.js'; // CommonJS -> EMS
 
 
+/**
+ * Internal dependencies
+ */
+import { getBaseUrl } from '../utilities.js';
+
+
 export class PassphraseGenerator extends Component {
 	constructor( props ) {
 		super( props );
@@ -134,7 +140,12 @@ export class PassphraseGenerator extends Component {
 		const dependenciesAvailable = 'function' === typeof uuidv4 && 'function' === typeof argon2id;
 		// todo add others when they're loaded from local bundle
 
+		const componentUrl = getBaseUrl() + '/local-bundling/';
+
 		return html`
+			<${Fragment}>
+				<link rel="stylesheet" href="${ componentUrl }/local-bundling.css" />
+
 			<${ Card } id="passphrase-generator">
 				<${ CardHeader }>
 					Dependencies via Local Bundling
@@ -234,6 +245,7 @@ export class PassphraseGenerator extends Component {
 					</${Fragment}>
 				</${CardBody}>
 			</${Card}>
+			</${Fragment}>
 		`;
 	}
 }
