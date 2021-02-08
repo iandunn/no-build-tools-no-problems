@@ -17,6 +17,8 @@ add_action( 'admin_enqueue_scripts', function() {
 	wp_script_add_data( 'nbtnp-core', 'defer', true );
 	wp_script_add_data( 'nbtnp-core', 'type', 'module' );
 
+	// ⚠️ This doesn't support IE1. You need to run callers through Babel to bundle production code together.
+	// @see https://github.com/guybedford/es-module-shims/issues/14
 	wp_register_script(
 		'es-module-shims',
 		plugins_url( 'es-module-shims.js', __FILE__ ), // can't be loaded via skypack

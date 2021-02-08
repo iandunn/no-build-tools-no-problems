@@ -91,12 +91,20 @@ add_action( 'admin_enqueue_scripts', function( $hook_suffix ) {
 	}
 
 	$folder       = get_serve_folder();
-	$dependencies = array( 'wp-element', 'wp-components', 'wp-api-fetch', 'es-module-shims' );
+	$dependencies = array( 'wp-element', 'wp-components', 'wp-api-fetch' );
 	// need to add wp-polyfill as a dependency? maybe for api-fetch & other stuff
+		// it's added automatically?
+
+	// no need to load this when everything is bundled together and transpiled
+	// not working yet, see https://github.com/iandunn/no-build-tools-no-problems/issues/8
+	//if ( 'source' === $folder ) {
+		$dependencies[] =  'es-module-shims';
+	//}
 
 	//	if ( 'source' === $folder ) {
 	$dependencies[] = 'nbtnp-core';
 	// todo need for htm even in build, until we config snowpack to use babel to transpile htm to raw js
+		// that should be done already, right?
 
 	// if that working, then maybe uninstal npm packages being used. can ditch npm alltogether?
 	//	}
@@ -112,7 +120,12 @@ add_action( 'admin_enqueue_scripts', function( $hook_suffix ) {
 		true
 	);
 	wp_script_add_data( 'no-build-tools-no-problems', 'defer', true );
-	wp_script_add_data( 'no-build-tools-no-problems', 'type', 'module-shim' ); // convert to 'module' when no longer need shim
+
+	// production files are transpiled to ES5, so can't use type=module
+	// not working yet, see above
+	//if ( 'source' === $folder ) {
+		wp_script_add_data( 'no-build-tools-no-problems', 'type', 'module-shim' ); // convert to 'module' when no longer need shim
+	//}
 
 	wp_enqueue_style(
 		'no-build-tools-no-problems',

@@ -62,6 +62,7 @@ module.exports = {
 		bundle: false,
 			// todo want this to be `true` for performance, but need to setup dependencies to be in a separate entrypoint first
 			// otherwise this breaks the "bundle" task workflow b/c the dep files don't exist b/c they were in index.js which was deleted
+			// todo also need this to be true for ie11 support, b/c it needs all the `import`s bundled into an IIFE
 
 		// This minifies JS _and_ CSS. No need for cssnano.
 		minify: true,
