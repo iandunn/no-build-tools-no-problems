@@ -5,8 +5,8 @@
  * Description: Experiment building a WordPress-centric React app without any build tools.
  */
 
-namespace NoBuildToolsNoProblems;
-use function NoBuildToolsNoProblems\Core\{ __return_placeholder_div, preload_modules };
+namespace No_Build_Tools_No_Problems;
+use function No_Build_Tools_No_Problems\Core\{ __return_placeholder_div, preload_modules };
 
 // This is the stuff the Core could potentially provide to plugins.
 require __DIR__ . '/core/core.php';

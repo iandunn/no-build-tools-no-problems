@@ -1,8 +1,8 @@
 {
-	"__dependencies:comment": "Production dependencies are managed by Snowpack. See `snowpack.deps.json`.",
 	"browserslist": [
 		"extends @wordpress/browserslist-config"
 	],
+	"dependencies:comment": "Production dependencies are managed by Snowpack. See `snowpack.deps.json`.",
 	"dependencies": {},
 	"devDependencies": {
 		"@babel/cli": "^7.12.10",

@@ -1,6 +1,6 @@
 <?php
 
-namespace NoBuildToolsNoProblems\Core;
+namespace No_Build_Tools_No_Problems\Core;
 
 /*
  * These are things that Core could provide to plugins
