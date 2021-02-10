@@ -7,7 +7,16 @@ namespace No_Build_Tools_No_Problems\Core;
  */
 
 add_action( 'admin_enqueue_scripts', function() {
-	// This is always loaded from `source/`, because it's not needed when a build step is used.
+	// this would eventually be wp-includes/js/dist/htm.js or whatever.
+	// have to use unpckg b/c skypack is always an ESM, but want an IIFE in this scenario
+	wp_register_script(
+		'htm',
+		'https://unpkg.com/htm@3.0.4/dist/htm.js',
+		array(),
+		null, // Don't modify the URL, that will break unpkg's parsing.
+		true
+	);
+
 	wp_register_script(
 		'nbtnp-core',
 		plugins_url( 'core/core.js', __DIR__ ),
@@ -15,7 +24,6 @@ add_action( 'admin_enqueue_scripts', function() {
 		filemtime( dirname( __DIR__ ) . '/core/core.js' )
 	);
 	wp_script_add_data( 'nbtnp-core', 'defer', true );
-	wp_script_add_data( 'nbtnp-core', 'type', 'module' );
 
 	// ⚠️ This doesn't support IE1. You need to run callers through Babel to bundle production code together.
 	// @see https://github.com/guybedford/es-module-shims/issues/14
@@ -60,6 +68,8 @@ add_filter( 'script_loader_tag', function( $tag, $handle, $src ) {
 // in place where this can't be called directly -- e.g., add_menu_page `callback` param -- you can use an
 // an anonymous function to call it. adding `callback_args` params to functions like that would get rid
 // of the need for a anon function
+//
+// This works in conjunction with `renderLoadingContainer()` on the JS side.
 function __return_loading_container( $id ) {
 	?>
 

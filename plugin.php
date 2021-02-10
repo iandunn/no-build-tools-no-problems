@@ -91,13 +91,13 @@ add_action( 'admin_enqueue_scripts', function( $hook_suffix ) {
 	}
 
 	$folder       = get_serve_folder();
-	$dependencies = array( 'wp-element', 'wp-components', 'wp-api-fetch' );
+	$dependencies = array( 'nbtnp-core', 'wp-element', 'wp-components', 'wp-api-fetch' );
 	// need to add wp-polyfill as a dependency? maybe for api-fetch & other stuff
 		// it's added automatically?
 
 	if ( 'source' === $folder ) {
 		// Don't need HTM in production, because Babel transpiles it away.
-		$dependencies[] = 'nbtnp-core';
+		$dependencies[] = 'htm';
 	}
 
 	// this should only be needed when 'source' === $folder, because the build files target ES5, so they can't use modules
@@ -172,7 +172,7 @@ add_action( 'admin_print_scripts-toplevel_page_no-build-tools-no-problems', func
 
 	if ( ! file_exists( __DIR__ . $hmr_folder . '/hmr-client.js' ) ) {
 		// return early if not running watch task, how to detect?
-		// presence of hmr-client in vendor folder
+		// presence of hmr-client in vendor folder? no b/c bundle task doesn't delete it
 		return;
 	}
 
