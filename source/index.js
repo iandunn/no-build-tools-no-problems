@@ -26,6 +26,8 @@ function init() {
 	}
 }
 
+// todo all of this could be done by core instead
+
 // now that this is defer'd, it's not guaranteed that it'll core.js will finish loading first?
 // will probably break if it doesn't. maybe index.js should be defered, but core.js shouldn't be?
 //

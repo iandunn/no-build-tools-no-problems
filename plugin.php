@@ -6,7 +6,7 @@
  */
 
 namespace No_Build_Tools_No_Problems;
-use function No_Build_Tools_No_Problems\Core\{ __return_placeholder_div, preload_modules };
+use function No_Build_Tools_No_Problems\Core\{ __return_loading_container, preload_modules };
 
 // This is the stuff the Core could potentially provide to plugins.
 require __DIR__ . '/core/core.php';
@@ -59,7 +59,7 @@ function render_shell() {
 
 			<?php endif; ?>
 
-			<?php __return_placeholder_div( 'nbtnp-cards-container' ); ?>
+			<?php __return_loading_container( 'nbtnp-cards-container' ); ?>
 		</div>
 	<?php
 }

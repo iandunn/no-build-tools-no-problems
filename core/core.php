@@ -57,13 +57,10 @@ add_filter( 'script_loader_tag', function( $tag, $handle, $src ) {
 	return $tag;
 }, 10, 3 );
 
-// rename to "element" to be generic?
-// maybe use "placeholder" or "shell". not an app shell in the PWA sense.
-//
 // in place where this can't be called directly -- e.g., add_menu_page `callback` param -- you can use an
 // an anonymous function to call it. adding `callback_args` params to functions like that would get rid
 // of the need for a anon function
-function __return_placeholder_div( $id ) {
+function __return_loading_container( $id ) {
 	?>
 
 	<div id="<?php echo esc_attr( $id ); ?>" class="loading-content">
