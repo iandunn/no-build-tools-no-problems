@@ -12,7 +12,8 @@ import { getLoadPath, getBaseUrl } from '../utilities.js';
 
 export function DeveloperExperience() {
 	const loadPath = getLoadPath();
-	const componentUrl = getBaseUrl() + '/developer-experience/';
+	const watching = 'object' === typeof import.meta?.hot;
+	const componentUrl = getBaseUrl() + '/developer-experience';
 
 	return html`
 		<${Fragment}>
@@ -43,11 +44,23 @@ export function DeveloperExperience() {
 							</p>
 						</div>
 
-						${ 'source' === loadPath && html`
+
+						${ 'source' === loadPath && ! watching && html`
 							<${ Notice } status="info" isDismissible=${ false } >
 								<p>
-									You're running from <code>source/</code>, so the nested styles won't apply, and the image below will be blurred.
-									<code>npm run build</code> and refresh to load the <code>build/</code> files, where PostCSS will transform the nested styles to vanilla CSS and un-blur the image.
+									You're running from <code>source/</code> without the <code>watch</code> task, so the nested styles won't apply, and the image below will be blurred.
+
+									<code>npm run watch</code> or <code>npm run build</code> and then refresh. That will cause PostCSS to transform the nested styles to vanilla CSS, and un-blur the image.
+								</p>
+							<//>
+						` }
+
+						${ watching && html`
+							<${ Notice } status="info" isDismissible=${ false } >
+								<p>
+									You're running the <code>watch</code> task, so the nested styles <em>will</em> apply, and the image below will <strong>not</strong> be blurred.
+
+									<code>Control-C</code> in your terminal to cancel the watch task, then refresh to load the unprocessed files. When you do, the image will be blurred.
 								</p>
 							<//>
 						` }

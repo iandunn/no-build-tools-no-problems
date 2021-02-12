@@ -83,6 +83,22 @@ function get_serve_folder() {
 	return $folder;
 }
 
+// Note: This is only necessary to demonstrate different approaches. In real-world applications you'd either
+// commit to running the watch task or not, or at least the application code wouldn't care which.
+function running_watch_task() {
+	static $running = null; // Cache the result so it's not run more than once per page load.
+
+	if ( null === $running ) {
+		$null    = null;
+		$running = is_resource( @fsockopen( 'localhost', '8081', $null, $null, 1 ) );
+
+		if ( ! $running ) {
+			error_clear_last(); // Prevent the `body.php-error` CSS class from being added.
+		}
+	}
+
+	return $running;
+}
 
 // register/enqueue scripts & styles
 add_action( 'admin_enqueue_scripts', function( $hook_suffix ) {
@@ -95,6 +111,13 @@ add_action( 'admin_enqueue_scripts', function( $hook_suffix ) {
 	// need to add wp-polyfill as a dependency? maybe for api-fetch & other stuff
 		// it's added automatically?
 
+	if ( running_watch_task() ) {
+		$script_url = 'http://localhost:8081/index.js';
+		// make url/port DRY w/ websocket below
+	} else {
+		$script_url = plugins_url( "$folder/index.js", __FILE__ );
+	}
+
 	if ( 'source' === $folder ) {
 		// Don't need HTM in production, because Babel transpiles it away.
 		$dependencies[] = 'htm';
@@ -106,7 +129,8 @@ add_action( 'admin_enqueue_scripts', function( $hook_suffix ) {
 
 	wp_enqueue_script(
 		'no-build-tools-no-problems',
-		plugins_url( "$folder/index.js", __FILE__ ),
+		$script_url,
+		/// rename to more specific
 		$dependencies,
 		filemtime( __DIR__ . "/$folder/index.js" ),
 
@@ -164,27 +188,19 @@ add_action( 'admin_print_scripts', function() {
 	<?php
 } );
 
-// setup auto reloading
-// actual hmr isn't working yet -- https://github.com/snowpackjs/snowpack/discussions/2565
+// configure hot module reloading
 // should be in core.php?
 add_action( 'admin_print_scripts-toplevel_page_no-build-tools-no-problems', function() {
-	$hmr_folder = '/build/vendor/';
-
-	if ( ! file_exists( __DIR__ . $hmr_folder . '/hmr-client.js' ) ) {
-		// return early if not running watch task, how to detect?
-		// presence of hmr-client in vendor folder? no b/c bundle task doesn't delete it
+	if ( ! running_watch_task() ) {
 		return;
 	}
 
 	?>
 
 	<script>
-		// is it safe to hardcode that port? maybe set it in config file and pull from .env file?
-		window.HMR_WEBSOCKET_URL = 'ws://localhost:12321';
+		// not safe to hardcode the port. maybe set it in config file and pull from .env file?
+		window.HMR_WEBSOCKET_URL = 'ws://localhost:8081';
 	</script>
-
-    <script type="module" src="<?php echo plugins_url( $hmr_folder . '/hmr-client.js', __FILE__ ); ?>"></script>
-	<script type="module" src="<?php echo plugins_url( $hmr_folder . '/hmr-error-overlay.js', __FILE__ ); ?>"></script>
 
 	<?php
 } );

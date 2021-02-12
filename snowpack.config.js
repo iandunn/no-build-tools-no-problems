@@ -43,8 +43,10 @@ module.exports = {
 		source: 'remote',
 	},
 
-	// Not using their localhost server because need everything to run inside WordPress/PHP context.
-	//devOptions: {},
+	devOptions: {
+		port: 8081,     // Avoid conflicts with proxies on 8080.
+		open: 'none',   // Devs will still visit the WP/PHP server URL in their browser.
+	},
 
 	buildOptions: {
 		metaUrlPath : 'vendor',

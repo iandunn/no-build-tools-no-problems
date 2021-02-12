@@ -49,7 +49,7 @@ export class LatestPostsCard extends Component {
 
 	render = () => {
 		const { loaded, loading, posts } = this.state;
-		const componentUrl = getBaseUrl() + '/baseline/';
+		const componentUrl = getBaseUrl() + '/baseline';
 
 		return html`
 			<${Fragment}>

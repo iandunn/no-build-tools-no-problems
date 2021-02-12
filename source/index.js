@@ -5,6 +5,10 @@ const html = wp.html;
 const { Fragment } = wp.element;
 const { renderLoadingContainer } = wp.utils;
 
+// This is required for HMR to work, because we're using WP to serve the HTML instead of Snowpack's localhost server.
+if ( import.meta.hot ) {
+	import.meta.hot.accept();
+}
 
 /**
  * Internal dependencies

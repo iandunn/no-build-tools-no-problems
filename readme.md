@@ -23,7 +23,7 @@ You can run the same `source/` scripts in production if you'd like. For smaller 
 
 If that's where you're at, you can `rm .gitignore babel.config.js package.json package-lock.json`, and revel in how tidy your root folder is.
 
-If want to optimize performance, or need to support older browsers, then you can add a build step for production files. You'll still be able to develop locally without any `watch` tooling, though.
+If want to optimize performance, or need to support older browsers, then you can use the <code>build</code> step for your production files. You'll still be able to develop locally without any `watch` tooling, though.
 
 1. `npm install`
 1. `npm run build`
@@ -42,15 +42,15 @@ There are two ways to import dependencies, depending on your needs and preferenc
 
 1. **Locally bundled packages:** You can also bundle packages locally if you prefer, but still much faster and more conveniently than traditional approaches.
 
-   [Snowpack](https://snowpack.dev) is used to generate bundles 10x faster than Webpack, and only when needed. You don't need to run a `watch` task, just `npm run bundle` when you add/remove a dependency. It still does tree-shaking, will automatically up-convert CommonJS modules to ESM, and has a much more ergonomic approach to package locking.
+   [Snowpack](https://snowpack.dev) is used to generate bundles 10x faster than Webpack, and only when needed. You don't need to run the `watch` task, just `npm run bundle` when you add/remove a dependency. It still does tree-shaking, will automatically up-convert CommonJS modules to ESM, and has a much more ergonomic approach to package locking.
 
 
 ### Optional Tooling for Improved Developer Experience
 
 <code>npm run watch</code> will add additional features, but it's not required.
 
-* Today: Live reloading and PostCSS.
-* Future: Hot Module Reloading, React Fast Refresh.
+* Today: Hot Module Reloading and PostCSS.
+* Future: React Fast Refresh.
 
 
 ### Results

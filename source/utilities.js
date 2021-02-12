@@ -2,7 +2,7 @@
 export function getBaseUrl() {
 	const scriptUrl = document.getElementById( 'no-build-tools-no-problems-js' ).getAttribute( 'src' );
 
-	return scriptUrl.substring( 0, scriptUrl.lastIndexOf( '/' ) ) + '/';
+	return scriptUrl.substring( 0, scriptUrl.lastIndexOf( '/' ) );
 }
 
 // Returns 'build' if loaded from `build/` folder, 'source' otherwise

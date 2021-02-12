@@ -15,6 +15,7 @@ const html = wp.html;
  */
 //import { v4 as uuidv4 } from 'uuid';      // Native ESM
 //import { argon2id }     from 'hash-wasm'; // Native ESM
+// maybe change these to dynamic imports, so could flip the card on/off automatically based on import.meta.hot || build === path?
 
 // todo convert these to import maps too, but need to wait until https://github.com/snowpackjs/snowpack/discussions/2548 is released
 // then check if can destructure specific functions from any of these, since snowpack will be is bundling
@@ -140,7 +141,7 @@ export class PassphraseGenerator extends Component {
 		const dependenciesAvailable = 'function' === typeof uuidv4 && 'function' === typeof argon2id;
 		// todo add others when they're loaded from local bundle
 
-		const componentUrl = getBaseUrl() + '/local-bundling/';
+		const componentUrl = getBaseUrl() + '/local-bundling';
 
 		return html`
 			<${Fragment}>
