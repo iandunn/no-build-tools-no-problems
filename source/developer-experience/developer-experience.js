@@ -44,36 +44,31 @@ export function DeveloperExperience() {
 							</p>
 						</div>
 
-
-						${ 'source' === loadPath && ! watching && html`
-							<${ Notice } status="info" isDismissible=${ false } >
+						<${ Notice } status="info" isDismissible=${ false } >
+							${ 'source' === loadPath && ! watching && html`
 								<p>
 									You're running from <code>source/</code> without the <code>watch</code> task, so the nested styles won't apply, and the image below will be blurred.
 
 									<code>npm run watch</code> or <code>npm run build</code> and then refresh. That will cause PostCSS to transform the nested styles to vanilla CSS, and un-blur the image.
 								</p>
-							<//>
-						` }
+							` }
 
-						${ watching && html`
-							<${ Notice } status="info" isDismissible=${ false } >
+							${ watching && html`
 								<p>
 									You're running the <code>watch</code> task, so the nested styles <em>will</em> apply, and the image below will <strong>not</strong> be blurred.
 
 									<code>Control-C</code> in your terminal to cancel the watch task, then refresh to load the unprocessed files. When you do, the image will be blurred.
 								</p>
-							<//>
-						` }
+							` }
 
-						${ 'build' === loadPath && html`
-							<${ Notice } status="info" isDismissible=${ false } >
+							${ 'build' === loadPath && html`
 								<p>
 									You're running from <code>build/</code>, so the nested styles <em>will</em> apply, and the image below will <strong>not</strong> be blurred.
 
 									Run <code>rm -rf build/</code> and refresh to load the <code>source/</code> styles, where which transformed by PostCSS.
 								</p>
-							<//>
-						` }
+							` }
+						<//>
 
 						<img src="${ componentUrl }/code-is-poetry-2x.png" alt="Code is Poetry" />
 					</${Fragment} />
