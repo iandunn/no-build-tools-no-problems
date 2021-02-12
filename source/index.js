@@ -9,6 +9,9 @@ const { renderLoadingContainer } = wp.utils;
 if ( import.meta.hot ) {
 	import.meta.hot.accept();
 }
+// todo get rid of warnings during build process. i know it won't apply, that's expected
+//
+// submit PR to change console.log() to console.info(), so easier to ignore
 
 /**
  * Internal dependencies
