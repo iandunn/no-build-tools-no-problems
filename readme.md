@@ -84,6 +84,7 @@ If we can get this approach working well for a range of small/medium-sized plugi
 
 This paradigm is often referred to as "buildless" or "unbundled development".
 
+* [Back to Basics: A Possible Future Without JavaScript Build Tools](https://andrewduthie.com/2019/11/29/back-to-basics-a-possible-future-without-javascript-build-tools/) by Andrew Duthie
 * _Don't Build That App!_ by Luke Jackson [ [article](https://formidable.com/blog/2019/no-build-step/) | [presentation](https://www.youtube.com/watch?v=mVjZQrsXBQE) ].
 * [A Future Without Webpack](https://www.pika.dev/blog/pika-web-a-future-without-webpack) by Pika.
 * _[Developing Without a Build](https://dev.to/open-wc/developing-without-a-build-1-introduction-26ao)_ by Lars den Bakker.
