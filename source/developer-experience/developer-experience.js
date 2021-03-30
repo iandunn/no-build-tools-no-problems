@@ -34,7 +34,7 @@ export function DeveloperExperience() {
 							</p>
 
 							<p>
-								<strong>Live reloading:</strong> Saving changes to JS and CSS files will automatically trigger a page refresh.
+								<strong>Hot Module Reloading:</strong> Saving changes to JS and CSS files will automatically trigger a page refresh.
 							</p>
 
 							<p>
