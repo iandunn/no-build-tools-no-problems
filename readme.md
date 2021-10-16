@@ -49,7 +49,7 @@ There are two ways to import dependencies, depending on your needs and preferenc
 
 <code>npm run watch</code> will add additional features, but it's not required.
 
-* Today: Hot Module Reloading and PostCSS.
+* Today: PostCSS, Hot Module Reloading, and automated testing.
 * Future: React Fast Refresh.
 
 

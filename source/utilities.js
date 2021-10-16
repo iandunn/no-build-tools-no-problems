@@ -13,3 +13,8 @@ export const getLoadPath = () => {
 	// Could check for that, but this approach is consistent with `get_serve_file()` in `plugin.php`.
 	return scriptUrl.indexOf( '/build/' ) > 0 ? 'build' : 'source';
 }
+
+// Simple function to demonstrate automated testing.
+export function sum( a, b ) {
+	return a + b;
+}

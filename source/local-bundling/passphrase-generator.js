@@ -50,7 +50,7 @@ export class PassphraseGenerator extends Component {
 	}
 
 	// Set default state.
-	// todo lifecyle has been renamed, update
+	// todo lifecycle has been renamed, update
 	componentWillMount = () => {
 		// ⚠️ This isn't fine-tuned, its just for demonstration purposes. These could be completely inaccurate in reality.
 		entropy.config( {
