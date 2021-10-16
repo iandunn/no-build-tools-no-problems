@@ -120,3 +120,21 @@ function preload_modules( $plugin_folder ) {
 		printf( '<link rel="modulepreload" href="%s" />', $url );
 	}
 }
+
+add_action( 'admin_print_styles', function() {
+	?>
+
+	<style>
+		/* Make it obvious that something is there, since the icon is easy to miss.
+		Maybe replace this with a Calypso-style container with an animated box or something
+		https://github.com/Automattic/wp-calypso/blob/f585663594c18ca24d582a637f0e303d1350a6c0/docs/reactivity.md
+		*/
+		.loading-content {
+			height: 400px;
+			background-color: #e8e8e8;
+			border: 5px solid grey;
+		}
+	</style
+
+	<?php
+} );
