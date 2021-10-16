@@ -1,10 +1,12 @@
 #
-# You may or may not want to track `build/`, depending on your use case.
+# You may or may not want to track `build/`, depending on where your _production_ code is served from:
 #
-# First party code served from `source/` in production, depdencies served via `skypack.dev` : Ignore entire folder
-# First party code served from `source/` in production, depdencies served via `build/`      : Ignore entire folder, except `build/vendor/pkg`
-# First party code served from `build/`  in production, depdencies served via `skypack.dev` : Track entire folder,  except `build/vendor/pkg`
-# First party code served from `build/`  in production, depdencies served via `build/`      : Track entire folder
+#  First party code folder  |  Dependencies code folder  |  Recommendation
+#  -----------------------  |  ------------------------  |  --------------
+#  source/                  |  skypack.dev               |  Ignore entire folder
+#  source/                  |  build/                    |  Ignore entire folder, except `build/vendor/pkg`
+#  build/                   |  skypack.dev               |  Track entire folder,  except `build/vendor/pkg`
+#  build/                   |  build/                    |  Track entire folder
 #
 build/
 
@@ -12,3 +14,6 @@ build/
 # This ignore is redundant if you choose to ignore all of build, but is desirable if you're tracking `build/vendor/`.
 build/vendor/.env
 build/vendor/pkg/import-map.json
+
+# Local artifacts
+.snowpack
