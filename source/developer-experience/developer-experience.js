@@ -12,7 +12,7 @@ import { getLoadPath, getBaseUrl } from '../utilities.js';
 
 export function DeveloperExperience() {
 	const loadPath = getLoadPath();
-	const watching = 'object' === typeof import.meta?.hot;
+	const watching = 'object' === typeof import.meta?.hot; // replcae w/ utility function
 	const componentUrl = getBaseUrl() + '/developer-experience';
 
 	return html`

@@ -111,6 +111,7 @@ add_action( 'admin_enqueue_scripts', function( $hook_suffix ) {
 	// need to add wp-polyfill as a dependency? maybe for api-fetch & other stuff
 		// it's added automatically?
 
+	// The development source gets served by Snowpack's local server, so it can inject dependencies etc.
 	if ( running_watch_task() ) {
 		$script_url = 'http://localhost:8081/index.js';
 		// make url/port DRY w/ websocket below

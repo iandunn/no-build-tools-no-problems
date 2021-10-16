@@ -4,6 +4,10 @@
 const { Card, CardHeader, CardBody, Icon, Notice, RangeControl, Spinner, Tooltip } = wp.components;
 const { Component, Fragment } = wp.element;
 
+// this is required in each file? should just be in the root file?
+//if ( import.meta.hot ) {
+//	import.meta.hot.accept();
+//}
 
 /**
  * External dependencies
@@ -20,6 +24,7 @@ const html = wp.html;
 // todo convert these to import maps too, but need to wait until https://github.com/snowpackjs/snowpack/discussions/2548 is released
 // then check if can destructure specific functions from any of these, since snowpack will be is bundling
 // it may expose them when couldn't access before
+// will have to `snowpack add {name}` or whatever for each
 import entropy     from 'https://cdn.skypack.dev/pin/ideal-password@v2.3.0-EzuQ0ccAMXBpJsZehqE7/min/ideal-password.js';                     // CommonJS -> EMS
 import diceware    from 'https://cdn.skypack.dev/pin/diceware-generator@v3.0.1-WULYULlcLeNCwJ34FCIG/min/diceware-generator.js';             // CommonJS -> EMS
 import eff2016Long from 'https://cdn.skypack.dev/pin/diceware-wordlist-en-eff@v1.0.1-gEyH81Lqvk6JUjXKPVT4/min/diceware-wordlist-en-eff.js'; // CommonJS -> EMS

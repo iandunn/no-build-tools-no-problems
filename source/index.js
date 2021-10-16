@@ -8,6 +8,7 @@ const { renderLoadingContainer } = wp.utils;
 // This is required for HMR to work, because we're using WP to serve the HTML instead of Snowpack's localhost server.
 if ( import.meta.hot ) {
 	import.meta.hot.accept();
+	// why do ALL modoules get reloaded instead of just the one that changed?
 }
 // todo get rid of warnings during build process. i know it won't apply, that's expected
 //
